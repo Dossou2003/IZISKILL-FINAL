@@ -107,6 +107,7 @@ USE_I18N = True
 USE_TZ = True
 
 
+AUTH_USER_MODEL = 'iziskill.User'
 
 
 # =================================================Pour le setting de JAZZMIN_SETTINGS==============================================================

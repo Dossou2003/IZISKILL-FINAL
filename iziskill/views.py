@@ -1,7 +1,12 @@
 from django.shortcuts import redirect, render
 
 from django.contrib.auth.decorators import login_required
-from .models import *
+from iziskill.models import *
+
+
+
+
+
 
 
 
@@ -467,19 +472,3 @@ def dashboard(request):
     else:
         # Optionnel : Si un autre type d'utilisateur existe, gérer ici
         return render(request, 'dashboard_default.html', {'user': request.user})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
