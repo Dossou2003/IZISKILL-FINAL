@@ -1,15 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<<<<<<< Updated upstream
-<!-- breadcrumbarea__section__start -->
-
-
-
-<!-- dashboardarea__area__start  -->
-<div class="dashboardarea sp_bottom_100">
-    <div class="container-fluid full__width__padding">
-=======
 <!-- breadcrumbarea_section_start -->
 
 
@@ -17,24 +8,15 @@
 <!-- dashboardarea_area_start  -->
 <div class="dashboardarea sp_bottom_100">
     <div class="container-fluid full_width_padding">
->>>>>>> Stashed changes
         <div class="row">
             <div class="col-xl-12">
                 <div class="dashboardarea__wraper">
                     <div class="dashboardarea__img">
-<<<<<<< Updated upstream
-                        <div class="dashboardarea__inner student__dashboard__inner">
-                            <div class="dashboardarea__left">
-
-
-                                <div class="dashboardarea__left__img">
-=======
                         <div class="dashboardarea_inner studentdashboard_inner">
                             <div class="dashboardarea__left">
 
 
                                 <div class="dashboardarea_left_img">
->>>>>>> Stashed changes
                                     {% if user.image %}
                                     <img loading="lazy" src="{{ user.image.url }}"
                                         alt="Photo de profil de {{ user.username }}">
@@ -46,11 +28,7 @@
 
 
 
-<<<<<<< Updated upstream
-                                <div class="dashboardarea__left__content">
-=======
                                 <div class="dashboardarea_left_content">
->>>>>>> Stashed changes
                                     <h4>{{ user.username }}</h4>
                                     <ul>
                                         <li> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -77,11 +55,7 @@
                                 </div>
                             </div>
                             <div class="dashboardarea__right">
-<<<<<<< Updated upstream
-                                <div class="dashboardarea__right__button">
-=======
                                 <div class="dashboardarea_right_button">
->>>>>>> Stashed changes
                                     <a class="default__button" href="create-course.html">Enroll A New Course
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -101,19 +75,11 @@
     </div>
 
     <div class="dashboard">
-<<<<<<< Updated upstream
-        <div class="container-fluid full__width__padding">
-            <div class="row">
-                <div class="col-xl-3 col-lg-3 col-md-12">
-                    <div class="dashboard__inner sticky-top">
-                        <div class="dashboard__nav__title">
-=======
         <div class="container-fluid full_width_padding">
             <div class="row">
                 <div class="col-xl-3 col-lg-3 col-md-12">
                     <div class="dashboard__inner sticky-top">
                         <div class="dashboard_nav_title">
->>>>>>> Stashed changes
                             <h6>Welcome, {{ user.username }}</h6>
                         </div>
                         <div class="dashboard__nav">
@@ -150,7 +116,7 @@
                                         Message</a><span class="dashboard__label">{{ unread_messages_count }}</span>
                                 </li>
                                 <li>
-                                    <a href="{% url 'student_enrolled_courses'}">
+                                    <a href="{% url 'student_enrolled_courses' %}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round"
@@ -160,7 +126,7 @@
                                         Enrolled Courses</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'student_wishlist'}">
+                                    <a href="{% url 'student_wishlist' %}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round"
@@ -170,7 +136,7 @@
                                         Wishlist</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'student_reviews'}">
+                                    <a href="{% url 'student_reviews' %}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
@@ -181,7 +147,7 @@
                                         Reviews</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'student_my_quiz_attempts'}">
+                                    <a href="{% url 'student_my_quiz_attempts' %}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round"
@@ -193,7 +159,7 @@
                                         My Quiz Attempts</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'student_assignments'}">
+                                    <a href="{% url 'student_assignments' %}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round"
@@ -204,7 +170,7 @@
                                         Assignments</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'student_settings'}">
+                                    <a href="{% url 'student_settings' %}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round"
@@ -234,32 +200,18 @@
                 </div>
                 <div class="col-xl-9 col-lg-9 col-md-12">
 
-<<<<<<< Updated upstream
-                    <div class="dashboard__content__wraper">
-                        <div class="dashboard__section__title">
-=======
                     <div class="dashboard_content_wraper">
                         <div class="dashboard_section_title">
->>>>>>> Stashed changes
                             <h4>Summary</h4> 
                         </div>
                         <div class="row">
                             <div class="col-xl-4 col-lg-6 col-md-12 col-12">
-<<<<<<< Updated upstream
-                                <div class="dashboard__single__counter">
-                                    <div class="counterarea__text__wraper">
-                                        <div class="counter__img">
-                                            <img loading="lazy" src="{% static 'img/counter/counter__1.png' %}" alt="counter">
-                                        </div>
-                                        <div class="counter__content__wraper">
-=======
                                 <div class="dashboard_single_counter">
                                     <div class="counterarea_text_wraper">
                                         <div class="counter__img">
                                             <img loading="lazy" src="{% static 'img/counter/counter__1.png' %}" alt="counter">
                                         </div>
                                         <div class="counter_content_wraper">
->>>>>>> Stashed changes
                                             <div class="counter__number">
                                                 <span class="counter">{{ enrolled_courses.count }}</span> 
                                             </div>
@@ -269,21 +221,12 @@
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-12 col-12">
-<<<<<<< Updated upstream
-                                <div class="dashboard__single__counter">
-                                    <div class="counterarea__text__wraper">
-                                        <div class="counter__img">
-                                            <img loading="lazy" src="{% static 'img/counter/counter__2.png' %}" alt="counter">
-                                        </div>
-                                        <div class="counter__content__wraper">
-=======
                                 <div class="dashboard_single_counter">
                                     <div class="counterarea_text_wraper">
                                         <div class="counter__img">
                                             <img loading="lazy" src="{% static 'img/counter/counter__2.png' %}" alt="counter">
                                         </div>
                                         <div class="counter_content_wraper">
->>>>>>> Stashed changes
                                             <div class="counter__number">
                                                 <span class="counter">{{ active_courses.count }}</span> 
                                             </div>
@@ -293,21 +236,12 @@
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-12 col-12">
-<<<<<<< Updated upstream
-                                <div class="dashboard__single__counter">
-                                    <div class="counterarea__text__wraper">
-                                        <div class="counter__img">
-                                            <img loading="lazy" src="{% static 'img/counter/counter__3.png' %}" alt="counter">
-                                        </div>
-                                        <div class="counter__content__wraper">
-=======
                                 <div class="dashboard_single_counter">
                                     <div class="counterarea_text_wraper">
                                         <div class="counter__img">
                                             <img loading="lazy" src="{% static 'img/counter/counter__3.png' %}" alt="counter">
                                         </div>
                                         <div class="counter_content_wraper">
->>>>>>> Stashed changes
                                             <div class="counter__number">
                                                 <span class="counter">{{ completed_courses.count }}</span> 
                                             </div>
@@ -346,13 +280,8 @@
 
 
 
-<<<<<<< Updated upstream
-                    <div class="dashboard__content__wraper">
-                        <div class="dashboard__section__title">
-=======
                     <div class="dashboard_content_wraper">
                         <div class="dashboard_section_title">
->>>>>>> Stashed changes
                             <h4>Feedbacks</h4>
 
                             <a href="{% url 'course'}">See More...</a>
@@ -371,11 +300,7 @@
                                         <tbody>
                                             
                                             {% for feedback in feedbacks %} 
-<<<<<<< Updated upstream
-                                                <tr class="dashboard__table__row">
-=======
                                                 <tr class="dashboard_table_row">
->>>>>>> Stashed changes
                                                     <th>
                                                         <a href="{% url 'course_detail' feedback.course.id %}">{{ feedback.course.title }}</a> 
                                                     </th>
@@ -383,11 +308,7 @@
                                                     <td>
 
 
-<<<<<<< Updated upstream
-                                                        <div class="dashboard__table__star">
-=======
                                                         <div class="dashboard_table_star">
->>>>>>> Stashed changes
                                                             {% for i in range(1, 6) %}
                                                                 {% if i <= feedback.rating %}
                                                                     <i class="icofont-star"></i> 
@@ -421,11 +342,7 @@
     </div>
 
 </div>
-<<<<<<< Updated upstream
-<!-- dashboardarea__area__end   -->
-=======
 <!-- dashboardarea_area_end   -->
->>>>>>> Stashed changes
 
 
 
@@ -436,18 +353,6 @@
 
 
 
-<<<<<<< Updated upstream
-<script>
-    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (localStorage.getItem("theme-color") === "dark" || (!("theme-color" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-        document.getElementById("light--to-dark-button")?.classList.add("dark--mode");
-    }
-    if (localStorage.getItem("theme-color") === "light") {
-        document.getElementById("light--to-dark-button")?.classList.remove("dark--mode");
-    } 
-</script>
-=======
->>>>>>> Stashed changes
 
 
 </body>
