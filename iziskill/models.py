@@ -3,20 +3,14 @@ from django.contrib.auth.models import AbstractUser
 
 
 from django.utils.text import slugify
-
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
-
-
-    
-    
+from django.contrib.auth.models import AbstractUser
+from django.db import models
 
 class User(AbstractUser):
     """
     Modèle personnalisé pour les utilisateurs, héritant de AbstractUser pour ajouter des champs spécifiques.
     """
-    username = models.CharField(max_length=255, verbose_name="Nom d'utilisateur",unique=True)
+    username = models.CharField(max_length=255, verbose_name="Nom d'utilisateur", unique=True)
     password = models.CharField(max_length=255, verbose_name="Mot de passe")
     status = models.CharField(
         max_length=10,
@@ -52,6 +46,9 @@ class User(AbstractUser):
 
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
+
+
+
 
 
 
