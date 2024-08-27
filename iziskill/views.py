@@ -1,7 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from django.contrib.auth.decorators import login_required
 from .models import *
+
+
+
+
 
 #  about par DOHA Primael
 
@@ -237,6 +241,64 @@ def instructor_assignments(request):
 def instructor_course(request):
     return render(request, 'instructor-course.html')
 
+
+
+
+
+
+from django.shortcuts import render, redirect
+from .models import User, Course, ClientTestimonial, Award
+
+def instructor_dashboard(request):
+    if request.user.is_authenticated and request.user.status == 'mentor':
+        instructor = request.user
+
+        # Données de l'instructeur
+        instructor_courses = Course.objects.filter(instructor=instructor)
+        total_courses = instructor_courses.count()
+        active_courses = instructor_courses.filter(  # Assurez-vous d'avoir un champ 'status' dans votre modèle Course
+            status='active'  
+        ).count()
+        completed_courses = instructor_courses.filter(
+            status='completed'  
+        ).count()
+        total_students = sum(course.students.count() for course in instructor_courses)
+        total_earnings = (
+            sum(course.total_points for course in instructor_courses)
+            # Ou calculez les gains réels si vous avez cette information dans votre modèle
+        )
+
+        # Témoignages des clients
+        testimonials = ClientTestimonial.objects.all()  # Ou filtrez si nécessaire
+
+        # Récompenses
+        awards = Award.objects.filter(  # Vous pourriez vouloir filtrer par instructeur si nécessaire
+            # ... 
+        )
+
+        context = {
+            'instructor': instructor,
+            'total_courses': total_courses,
+            'active_courses': active_courses,
+            'completed_courses': completed_courses,
+            'total_students': total_students,
+            'total_earnings': total_earnings,
+            'testimonials': testimonials,
+            'awards': awards,
+        }
+        return render(request, 'instructor_dashboard.html', context)
+    else:
+        return redirect('login')
+
+
+
+
+
+
+
+
+
+
 def instructor_dashboard(request):
     return render(request, 'instructor-dashboard.html')
 
@@ -270,8 +332,41 @@ def instructor_wishlist(request):
 def student_assignments(request):
     return render(request, 'student-assignments.html')
 
+
+
+
 def student_dashboard(request):
-    return render(request, 'student-dashboard.html')
+    if request.user.is_authenticated and request.user.status == 'apprenant':
+        user = request.user
+        
+        # Récupérer les données pour le tableau de bord de l'apprenant
+        enrolled_courses = Enrollment.objects.filter(user=user)
+        active_courses = enrolled_courses.filter(active=True)
+        completed_courses = Certificate.objects.filter(user=user)
+        feedbacks = Feedback.objects.filter(user=user)
+        quiz_attempts = QuizAttempt.objects.filter(user=user)
+        assignments = Assignment.objects.filter(course__in=enrolled_courses.values_list('course', flat=True))
+        unread_messages_count = Message.objects.filter(recipient=user, read=False).count()
+
+        context = {
+            'user': user,
+            'enrolled_courses': enrolled_courses,
+            'active_courses': active_courses,
+            'completed_courses': completed_courses,
+            'feedbacks': feedbacks,
+            'quiz_attempts': quiz_attempts,
+            'assignments': assignments,
+            'unread_messages_count': unread_messages_count,
+        }
+        return render(request, 'student_dashboard.html', context)
+    else:
+        # Rediriger si l'utilisateur n'est pas authentifié ou n'est pas un apprenant
+        return redirect('login')  # Assurez-vous d'avoir une vue 'login'
+
+
+
+
+
 
 def student_enrolled_courses(request):
     return render(request, 'student-enrolled-courses.html')
