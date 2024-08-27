@@ -767,7 +767,7 @@ src="{% static 'img/mega/mega_menu_2.png' %}"
                                                         </h4>
                                                         <ul class="mega__menu__item">
                                                             <li>
-<a href="{% url 'course'}">Grid <span
+<a href="{% url 'course' %}">Grid <span
                                                                         class="mega__menu__label">All Courses</span></a>
                                                             </li>
                                                             <li>
@@ -849,7 +849,7 @@ src="{% static 'img/mega/mega_menu_1.png' %}"
 
 
                                         <li><a class="headerarea__has__dropdown"
-                                                href="instructor-dashboard.html">Dashboard
+                                                href="{% url 'instructor_dashboard' %}">Dashboard
                                                 <i class="icofont-rounded-down"></i>
                                             </a>
                                             <ul class="headerarea__submenu headerarea__submenu--third--wrap">
@@ -894,16 +894,16 @@ src="{% static 'img/mega/mega_menu_1.png' %}"
                                                         <li>
 <a href="instructor-message.html">Message</a></li>
                                                         <li>
- <a href="{% url 'instructor_wishlist'}">Wishlist</a>
+ <a href="{% url 'instructor_wishlist' %}">Wishlist</a>
                                                         </li>
                                                         <li>
- <a href="{% url 'instructor_reviews'}">Review</a>
+ <a href="{% url 'instructor_reviews' %}">Review</a>
                                                         </li>
                                                         <li>
- <a href="{% url 'instructor_my_quiz_attempts'}">My
+ <a href="{% url 'instructor_my_quiz_attempts' %}">My
                                                                 Quiz</a></li>
                                                         <li>
- <a href="{% url 'instructor_order_history'}">Order
+ <a href="{% url 'instructor_order_history' %}">Order
                                                                 History</a></li>
                                                         <li>
  <a href="{% url 'instructor_course'}">My Courses</a>
@@ -912,13 +912,13 @@ src="{% static 'img/mega/mega_menu_1.png' %}"
                                                                 href="instructor-announcments.html">Announcements</a>
                                                         </li>
                                                         <li>
- <a href="{% url 'instructor_quiz_attempts'}">Quiz
+ <a href="{% url 'instructor_quiz_attempts' %}">Quiz
                                                                 Attempts</a></li>
                                                         <li><a
                                                                 href="instructor-assignments.html">Assignment</a>
                                                         </li>
                                                         <li>
- <a href="{% url 'instructor_settings'}">Settings</a>
+ <a href="{% url 'instructor_settings' %}">Settings</a>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -1356,7 +1356,7 @@ src="{% static 'img/mega/mega_menu_2.png' %}"
 
 
                                 <li class="menu-item-has-children ">
-<a href="{% url 'course'}">Courses</a>
+<a href="{% url 'course' %}">Courses</a>
 
                                     <ul class="dropdown">
                                         <li class="menu-item-has-children">
@@ -1364,7 +1364,7 @@ src="{% static 'img/mega/mega_menu_2.png' %}"
 
                                             <ul class="dropdown">
                                                 <li>
-<a href="{% url 'course'}">Grid <span class="mega__menu__label">All
+<a href="{% url 'course' %}">Grid <span class="mega__menu__label">All
                                                             Courses</span></a></li>
                                                 <li>
 <a href="{% url 'course_dark'}">Course Grid (Dark)</a></li>
@@ -1471,28 +1471,28 @@ src="{% static 'img/mega/mega_menu_1.png' %}"
  <a href="{% url 'instructor_enrolled_courses'}">Enrolled
                                                         Courses</a></li>
                                                 <li>
- <a href="{% url 'instructor_wishlist'}">Wishlist</a></li>
+ <a href="{% url 'instructor_wishlist' %}">Wishlist</a></li>
                                                 <li>
- <a href="{% url 'instructor_reviews'}">Review</a></li>
+ <a href="{% url 'instructor_reviews' %}">Review</a></li>
                                                 <li>
- <a href="{% url 'instructor_my_quiz_attempts'}">My Quiz</a>
+ <a href="{% url 'instructor_my_quiz_attempts' %}">My Quiz</a>
                                                 </li>
                                                 <li>
- <a href="{% url 'instructor_order_history'}">Order
+ <a href="{% url 'instructor_order_history' %}">Order
                                                         History</a></li>
                                                 <li>
  <a href="{% url 'instructor_course'}">My Courses</a></li>
                                                 <li>
-                                                     <a href="{% url 'instructor_announcments'}">Announcements</a>
+                                                     <a href="{% url 'instructor_announcments' %}">Announcements</a>
                                                 </li>
                                                 <li>
- <a href="{% url 'instructor_quiz_attempts'}">Quiz
+ <a href="{% url 'instructor_quiz_attempts' %}">Quiz
                                                         Attempts</a></li>
                                                 <li>
- <a href="{% url 'instructor_assignments'}">Assignment</a>
+ <a href="{% url 'instructor_assignments' %}">Assignment</a>
                                                 </li>
                                                 <li>
- <a href="{% url 'instructor_settings'}">Settings</a></li>
+ <a href="{% url 'instructor_settings' %}">Settings</a></li>
                                             </ul>
                                         </li>
 
@@ -1682,7 +1682,7 @@ src="{% static 'img/teacher/teacher__2.png' %}"
                                     </div>
                                     <div class="dashboardarea__right">
                                         <div class="dashboardarea__right__button">
-                                            <a class="default__button" href="create-course.html">Enroll A New Course
+                                            <a class="default__button" href="{% url 'create_course' %}">Enroll A New Course
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
                                         </div>
                                     </div>

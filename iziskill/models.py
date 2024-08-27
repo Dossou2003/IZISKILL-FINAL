@@ -111,12 +111,6 @@ class Video(models.Model):
 
     def _str_(self):
         return f"{self.title} ({self.course.title})"
-
-
- 
- 
-    
-    
     
 class MentoringSession(models.Model):
     mentor = models.ForeignKey(User, related_name='mentoring_sessions', on_delete=models.SET_NULL, null=True, limit_choices_to={'status': 'mentor'})
