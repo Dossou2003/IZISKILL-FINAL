@@ -110,6 +110,7 @@ USE_TZ = True
 AUTH_USER_MODEL = 'iziskill.User'
 
 
+
 # =================================================Pour le setting de JAZZMIN_SETTINGS==============================================================
 
 JAZZMIN_SETTINGS = JAZZMIN_SETTINGS 
