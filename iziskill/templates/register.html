@@ -17,22 +17,13 @@
             <div class="col-xl-12">
                 <div class="breadcrumb__content__wraper" data-aos="fade-up">
                     <div class="breadcrumb__title">
-                        {% if messages %}
-                        {% for message in messages %}
-                        {% if message.tags == 'error' %}
-                        <div class="alert alert-danger">{{ message }}</div>
-                        {% elif message.tags == 'success' %}
-                        <div class="alert alert-success">{{ message }}</div>
-                        {% endif %}
-                        {% endfor %}
-                        {% endif %}
-                        <h2 class="heading">Se connecter</h2>
+                        <h2 class="heading">S'inscrire</h2>
                     </div>
                     <div class="breadcrumb__inner">
                         <ul>
                             <li><a href="{% url 'index'}">
                                     Home</a></li>
-                            <li>Se connecter</li>
+                            <li>S'inscrire</li>
                         </ul>
                     </div>
                 </div>
@@ -57,96 +48,103 @@
 </div>
 <!-- breadcrumbarea__section__end-->
 
-<!-- login__section__start -->
+<!-- register__section__start -->
 <div class="loginarea sp_top_100 sp_bottom_100">
     <div class="container">
         <div class="row">
             <div class="col-xl-8 col-md-8 offset-md-2" data-aos="fade-up">
-                <ul class="nav  tab__button__wrap text-center" id="myTab" role="tablist">
+                <ul class="nav tab__button__wrap text-center" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="single__tab__link active" data-bs-toggle="tab" data-bs-target="#projects__one"
-                            type="button">Se connecter</button>
+                            type="button">S'inscrire</button>
                     </li>
                 </ul>
             </div>
 
-
             <div class="tab-content tab__content__wrapper" id="myTabContent" data-aos="fade-up">
-
                 <div class="tab-pane fade active show" id="projects__one" role="tabpanel"
                     aria-labelledby="projects__one">
                     <div class="col-xl-8 col-md-8 offset-md-2">
                         <div class="loginarea__wraper">
                             <div class="login__heading">
-                                <h5 class="login__title">Se connecter</h5>
-                                <p class="login__description">Vous n'avez pas de compte? <a
-                                        href="{% url 'register' %}">S'inscrire</a></p>
+                                <h5 class="login__title">S'inscrire</h5>
+                                
+                                <p class="login__description">Déjà un compte? <a
+                                    href="{% url 'login' %}">Connectez-vous</a></p>
                             </div>
 
-
-
-                            <form method="post" action="{% url 'login' %}">
+                            <form method="post" enctype="multipart/form-data" action="{% url 'register' %}">
                                 {% csrf_token %}
-                                <div class="login__form">
-                                    <label class="form__label">Username</label>
-                                    {{ form.username }}
+                                {{ form.non_field_errors }}
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <div class="login__form">
+                                            <label class="form__label">Prenom</label>
+                                            {{ form.first_name }}
+                                            <div class="text-danger">{{ form.first_name.errors }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="login__form">
+                                            <label class="form__label">Nom</label>
+                                            {{ form.last_name }}
+                                            <div class="text-danger">{{ form.last_name.errors }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="login__form">
+                                            <label class="form__label">Username</label>
+                                            {{ form.username }}
+                                            <div class="text-danger">{{ form.username.errors }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="login__form">
+                                            <label class="form__label">Email</label>
+                                            {{ form.email }}
+                                            <div class="text-danger">{{ form.email.errors }}</div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="login__form">
+                                                <label class="form__label">Status</label>
+                                                {{ form.status }}
+                                                <div class="text-danger">{{ form.status.errors }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="login__form">
+                                            <label class="form__label">Mot de passe </label>
+                                            {{ form.password1 }}
+                                            <div class="text-danger">{{ form.password1.errors }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="login__form">
+                                            <label class="form__label">Confirmation de mot de passe</label>
+                                            {{ form.password2 }}
+                                            <div class="text-danger">{{ form.password2.errors }}</div>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
-                                <div class="login__form">
-                                    <label class="form__label">Password</label>
-                                    {{ form.password }}
-                                </div>
+
                                 <div class="login__form d-flex justify-content-between flex-wrap gap-2">
                                     <div class="form__check">
-                                        <input id="forgot" type="checkbox">
-                                        <label for="forgot"> Remember me</label>
-                                    </div>
-                                    <div class="text-end login__form__link">
-                                        <a href="{% url 'password_reset' %}">Forgot your password?</a>
+                                        <input id="accept_pp" type="checkbox"> <label for="accept_pp">Accept the Terms and Privacy Policy</label>
                                     </div>
                                 </div>
                                 <div class="login__button">
-                                    <button type="submit" class="default__button">Log In</button>
+                                    <button type="submit" class="default__button">S'inscrire</button>
                                 </div>
                             </form>
-
-
-                            <div class="login__social__option">
-                                <p>or Log-in with</p>
-
-                                <ul class="login__social__btn">
-                                    <li><a class="default__button login__button__1" href="#"><i
-                                                class="icofont-facebook"></i> Gacebook</a></li>
-                                    <li><a class="default__button" href="#"><i class="icofont-google-plus"></i>
-                                            Google</a></li>
-                                </ul>
-                            </div>
-
-
                         </div>
                     </div>
                 </div>
-
-                <div class="tab-pane fade" id="projects__two" role="tabpanel" aria-labelledby="projects__two">
-                    <div class="col-xl-8 offset-md-2">
-                        <div class="loginarea__wraper">
-
-
-
-
-
-
-                        </div>
-                    </div>
-
-                </div>
-
-
-
             </div>
-
         </div>
 
-        <div class=" login__shape__img educationarea__shape_image">
+        <div class="login__shape__img educationarea__shape_image">
             <img loading="lazy" class="hero__shape hero__shape__1" src="{% static 'img/education/hero_shape2.png' %}"
                 alt="Shape">
             <img loading="lazy" class="hero__shape hero__shape__2" src="{% static 'img/education/hero_shape3.png' %}"
@@ -156,10 +154,9 @@
             <img loading="lazy" class="hero__shape hero__shape__4" src="{% static 'img/education/hero_shape5.png' %}"
                 alt="Shape">
         </div>
-
-
     </div>
 </div>
+
 
 <!-- login__section__end -->
 

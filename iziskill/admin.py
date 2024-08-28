@@ -4,7 +4,7 @@ from .models import User, Profile, Course, Statistic, Enrollment, Certificate, F
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('username', 'email', 'status', 'points')
+    list_display = ('id','email','username', 'is_active',  'status', 'points') 
     search_fields = ('username', 'email')
     list_filter = ('status',)
     ordering = ('username',)

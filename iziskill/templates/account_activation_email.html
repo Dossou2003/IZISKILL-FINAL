@@ -1,0 +1,21 @@
+Bienvenue, {{ user.username }}!
+            Nous sommes ravis de vous accueillir chez Iziskill. Vous êtes sur le point de rejoindre une communauté 
+            dynamique et passionnée. Pour finaliser votre inscription et activer votre compte, veuillez cliquer sur le bouton ci-dessous.
+            Une fois votre compte activé, vous pourrez explorer toutes nos fonctionnalités et profiter de nos services. 
+            Si vous avez des questions ou avez besoin d'aide, notre équipe est toujours là pour vous aider.
+                     http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+                Activer mon compte
+
+            Si le bouton ne fonctionne pas, copiez et collez le lien suivant dans votre navigateur :
+
+
+                     http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+       
+            Merci encore d'avoir choisi bourjon. Nous avons hâte de vous voir parmi nous !
+
+            
+        
+          2024 Bourjon. Tous droits réservés.
+            
+

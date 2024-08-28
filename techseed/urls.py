@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path
 from iziskill import views
 
-
+from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 
 from techseed import settings
@@ -137,7 +137,7 @@ urlpatterns = [
     path('lesson_3/',views.lesson_3, name="lesson_3"),
 
     # login par DOHA Primael 
-    path('login/',views.login, name="login"),
+    path('login/',views.login_user, name="login"),
 
     path('login_dark/',views.login_dark, name="login_dark"),
     
@@ -213,6 +213,12 @@ urlpatterns = [
 
     path('student_wishlist/',views.student_wishlist, name="student_wishlist"),
 
+
+
+
+# ==================================Déconnexion=================================
+
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     
 # E-COMMERCE par DOHA Primael 
     path('cart/',views.cart, name="cart"),
@@ -245,7 +251,12 @@ urlpatterns = [
 
     path('zoom_meeting_dark/',views.zoom_meeting_dark, name="zoom_meeting_dark"),
 
-
+    #Modification register par Armel
+    path('mot-de-passe-oublie/', views.password_reset_request, name='password_reset'),
+    path('mot-de-passe-oublie/done/', views.password_reset_done, name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', views.password_reset_confirm, name='password_reset_confirm'),
+    path('activate/<uidb64>/<token>/', views.activate, name='activate'),
+    path('register/',views.register, name="register"),
 
 
 

@@ -6,6 +6,8 @@ from django.utils.text import slugify
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from django.conf import settings
+
 class User(AbstractUser):
     """
     Modèle personnalisé pour les utilisateurs, héritant de AbstractUser pour ajouter des champs spécifiques.
@@ -22,7 +24,14 @@ class User(AbstractUser):
     image = models.ImageField(upload_to='images/', blank=True, verbose_name="Image de profil")
     email = models.EmailField(unique=True, verbose_name="Adresse e-mail")
     points = models.PositiveIntegerField(default=0, verbose_name="Points")  
-
+    phone_number = models.CharField(max_length=15, blank=True, verbose_name="Numéro de téléphone")
+    occupation = models.CharField(max_length=100, blank=True, verbose_name="Profession")
+    display_name = models.CharField(max_length=50, blank=True, verbose_name="Nom affiché")
+    bio = models.TextField(blank=True, verbose_name="Biographie")
+    facebook = models.URLField(max_length=200, blank=True, verbose_name="Profil Facebook")
+    twitter = models.URLField(max_length=200, blank=True, verbose_name="Profil Twitter")
+    linkedin = models.URLField(max_length=200, blank=True, verbose_name="Profil LinkedIn")
+    instagram = models.URLField(max_length=200, blank=True, verbose_name="Profil Instagram")
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='custom_user_set',
@@ -46,6 +55,14 @@ class User(AbstractUser):
 
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
+
+
+
+
+
+
+
+
 
 
 
@@ -77,14 +94,19 @@ class Profile(models.Model):
 
 
 class Course(models.Model):
+    
     title = models.CharField(max_length=255, verbose_name="Titre du cours")
     description = models.TextField(verbose_name="Description")
     instructor = models.ForeignKey(User, related_name='instructed_courses', on_delete=models.SET_NULL, null=True, limit_choices_to={'status': 'mentor'})
     category = models.ForeignKey(Category, related_name='courses', on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=6, decimal_places=2, verbose_name="Prix du cours")
+    original_price = models.DecimalField(max_digits=6, decimal_places=2, verbose_name="Prix d'origine", blank=True, null=True)
     total_points = models.PositiveIntegerField(default=0, verbose_name="Points totaux")
     created_at = models.DateTimeField(auto_now_add=True)
-    students = models.ManyToManyField(User) 
+    students = models.ManyToManyField(User)
+    progress = models.IntegerField(default=0)
+    lessons = models.PositiveIntegerField(default=0, verbose_name="Leçons")  
+    
     def _str_(self):
         return self.title
  

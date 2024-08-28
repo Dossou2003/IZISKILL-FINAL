@@ -4,6 +4,188 @@ from django.contrib.auth.decorators import login_required
 from iziskill.models import *
 
 
+from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import get_user_model
+from django.http import HttpResponseForbidden
+from .forms import CustomUserCreationForm, CustomAuthenticationForm
+from django.db import models
+from django.utils.encoding import force_str
+from .models import User
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
+from django.urls import reverse_lazy
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
+from django.core.mail import send_mail
+from django.urls import reverse
+from .tokens import account_activation_token
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from .forms import CustomPasswordResetForm, CustomSetPasswordForm
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
+
+
+
+def register(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False  # Désactiver le compte jusqu'à l'activation
+            user.save()
+
+            # Générer le jeton d'activation
+            current_site = get_current_site(request)
+            mail_subject = 'Activez votre compte.'
+            message = render_to_string('account_activation_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user),
+            })
+            send_mail(mail_subject, message, 'from@example.com', [user.email])
+
+            messages.success(request, "Un email d'activation a été envoyé à votre adresse email. Cliquez sur le lien pour activer votre compte")
+            return redirect('login')
+        else:
+            messages.error(request, "Veuillez corriger les erreurs ci-dessous.")
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'register.html', {'form': form})
+
+
+
+
+def login_user(request):
+    if request.method == 'POST':
+        form = CustomAuthenticationForm(request, data=request.POST)
+        username = form.data.get('username')
+        password = form.data.get('password')
+
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            user = None
+
+        if user is not None:
+            if user.is_active:
+                user = authenticate(request, username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    messages.success(request, f"Bienvenue {user.first_name} !")
+                    if user.status == 'apprenant':
+                        return redirect('student_dashboard')
+                    elif user.status == 'mentor':
+                        return redirect('instructor_dashboard')
+                else:
+                    messages.error(request, "Mot de passe incorrect.")
+            else:
+                messages.error(request, "Votre compte n'est pas encore activé. Veuillez vérifier votre email pour l'activer.")
+        else:
+            messages.error(request, "Identifiant incorrect.")
+    
+    else:
+        form = CustomAuthenticationForm()
+    
+    return render(request, 'login.html', {'form': form})
+
+
+
+User = get_user_model()
+
+def activate(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        messages.success(request, 'Votre compte a été activé avec succès.')
+        return redirect('login')
+    else:
+        messages.error(request, 'Le lien d\'activation est invalide.')
+        return redirect('register')
+    
+
+def password_reset_request(request):
+    if request.method == "POST":
+        form = CustomPasswordResetForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data["email"]
+            user = User.objects.get(email=email)
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            domain = get_current_site(request).domain
+            subject = "Réinitialisation du mot de passe"
+            message = render_to_string('password_reset_email.html', {
+                'user': user,
+                'domain': domain,
+                'uid': uid,
+                'token': token,
+            })
+            send_mail(subject, message, 'from@example.com', [email])
+            messages.success(request, "Un email de réinitialisation du mot de passe a été envoyé.")
+            return redirect('password_reset_done')
+    else:
+        form = CustomPasswordResetForm()
+    return render(request, 'password_reset.html', {'form': form})
+
+
+
+
+
+def password_reset_confirm(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        if request.method == 'POST':
+            form = CustomSetPasswordForm(user, request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Votre mot de passe a été réinitialisé avec succès.")
+                return redirect('login')
+        else:
+            form = CustomSetPasswordForm(user)
+        return render(request, 'password_reset_confirm.html', {'form': form})
+    else:
+        messages.error(request, "Le lien de réinitialisation du mot de passe est invalide.")
+        return redirect('password_reset')
+    
+    
+    
+
+def password_reset_done(request):
+    return render(request, 'password_reset_done.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -188,8 +370,6 @@ def lesson_3(request):
 
 # login par DOHA Primael 
 
-def login(request):
-    return render(request, 'login.html')
 def login_dark(request):
     return render(request, 'login-dark.html')
 
@@ -203,6 +383,13 @@ def maintenance_dark(request):
     return render(request, 'maintenance-dark.html')
 
 # 1212
+def base(request):
+    return render(request, 'base.html')
+
+
+
+# =================pour les extends=============================
+
 def base(request):
     return render(request, 'base.html')
 
@@ -362,11 +549,12 @@ def student_dashboard(request):
             'quiz_attempts': quiz_attempts,
             'assignments': assignments,
             'unread_messages_count': unread_messages_count,
+            'range_five': range(1, 6),  # Ajout de la plage range(1, 6) au contexte
         }
         return render(request, 'student_dashboard.html', context)
     else:
         # Rediriger si l'utilisateur n'est pas authentifié ou n'est pas un apprenant
-        return redirect('login')  # Assurez-vous d'avoir une vue 'login'
+        return redirect('login')
 
 
 
@@ -375,16 +563,17 @@ def student_dashboard(request):
 
 def student_enrolled_courses(request):
     return render(request, 'student-enrolled-courses.html')
-
+@login_required
 def student_message(request):
     return render(request, 'student-message.html')
 
 def student_my_quiz_attempts(request):
     return render(request, 'student-my-quiz-attempts.html')
 
-
+@login_required
 def student_profile(request):
-    return render(request, 'student-profile.html')
+    user = request.user
+    return render(request, 'student-profile.html', {'user':user})
 
 def student_reviews(request):
     return render(request, 'student-reviews.html')
