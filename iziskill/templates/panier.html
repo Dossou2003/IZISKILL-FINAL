@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+<h1 class="text-center my-4">PANIER</h1></br>
+
+    <div class="container">
+        
+        <ul class="list-group col-md-8 offset-md-2">
+            {{user.first_name}} {{user.last_name}}
+            <br/>{% for item in paniers %}
+            
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>
+                    {{ item.course.title }} - {{ item.quantity }} x {{ item.course.price }}FCFA
+                </span>
+                <span>
+                    <a href="{% url 'supprimer_du_panier' item.course.id %}" class="btn btn-danger btn-sm">Supprimer</a>
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="col-md-8 offset-md-2" style="display: flex; " >
+           
+            <div class="text-right font-weight-bold mt-4">Total: {{ total }}FCFA
+                
+            </div>
+            
+            <div class="headerarea__button" style="padding-left: 20px;padding-top: 13px; width: 90x; justify-content: center;">
+                <a href="" >Payer</a>
+            </div>
+        </div>
+        
+    </div>
+
+
+
+
+{% endblock %}
