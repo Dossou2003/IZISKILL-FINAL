@@ -228,8 +228,7 @@ def course(request):
 def course_dark(request):
     return render(request, 'course-dark.html')
 
-def courses_details(request):
-    return render(request, 'course-details.html')
+
 def courses_details_dark(request):
     return render(request, 'course-details-dark.html')
 
@@ -247,8 +246,69 @@ def courses_grid(request):
     return render(request, 'course-grid.html')
 def courses_grid_dark(request):
     return render(request, 'course-grid-dark.html')
+# PAR PRIMAEL DOHA 
+
 def course_list(request):
-    return render(request, 'course-list.html')
+    courses = Course.objects.all()  # Récupère tous les objets Course
+    for course in courses:
+        if not course.image:
+            # Gérer les cas où il n'y a pas d'image associée
+            course.image_url = None
+        else:
+            course.image_url = course.image.url
+    return render(request, 'course-list.html', {'courses': courses})
+
+def courses_details(request, id):
+    course = get_object_or_404(Course, id=id)
+    return render(request, 'course-details.html', {'course': course})
+
+def panier_view(request):
+    paniers = Panier.objects.filter(user=request.user)
+    total = sum(item.total_price for item in paniers)
+    
+    return render(request, 'panier.html', {'paniers': paniers, 'total': total})
+
+def ajouter_au_panier(request, course_id):
+    course = Course.objects.get(id=course_id)
+    panier, created = Panier.objects.get_or_create(user=request.user, course=course)
+    
+    if not created:
+        panier.quantity += 1
+        panier.save()
+    
+    return panier
+
+
+
+            
+def ajouter_au_panier_view(request, course_id):
+    ajouter_au_panier(request, course_id)
+    return redirect('panier_view')
+
+def supprimer_du_panier(request, course_id):
+    course = Course.objects.get(id=course_id)
+    panier = Panier.objects.filter(user=request.user, course=course).first()
+    
+    if panier:
+        if panier.quantity > 1:
+            panier.quantity -= 1
+            panier.save()
+        else:
+            panier.delete()
+            
+def supprimer_du_panier_view(request, course_id):
+    supprimer_du_panier(request, course_id)
+    return redirect('panier_view')
+
+def payment(request):
+    return render(request, 'payment.html')
+
+
+
+
+
+#####
+
 def course_list_dark(request):
     return render(request, 'course-list-dark.html')
 

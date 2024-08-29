@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import User, Profile, Course, Statistic, Enrollment, Certificate, Feedback, Message, Wishlist, QuizAttempt, Assignment, UserSetting, InstructorDashboard,ClientTestimonial, Award
+from .models import User, Profile, Course, Statistic, Enrollment, Certificate, Feedback, Message, Wishlist, QuizAttempt, Assignment, UserSetting, InstructorDashboard,ClientTestimonial, Award,Category,Panier
 
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id','email','username', 'is_active',  'status', 'points') 
+    list_display = ('id','email','username', 'is_active',  'status', 'points', 'image') 
     search_fields = ('username', 'email')
     list_filter = ('status',)
     ordering = ('username',)
@@ -14,12 +14,34 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'location', 'birth_date')
     search_fields = ('user__username',)
 
+# ADMIN PAR PRIMAEL DOHA 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ('title', 'instructor', 'total_points')
     search_fields = ('title', 'instructor__username')
     list_filter = ('instructor',)
     filter_horizontal = ('students',)
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description',)
+    search_fields = ('name',)
+    list_filter = ('name',)
+
+
+@admin.register(Panier)
+class PanierAdmin(admin.ModelAdmin):
+    list_display = ('user', 'course', 'quantity', 'total_price', 'added_at')
+    search_fields = ('user__username', 'course__title')
+    list_filter = ('user', 'course', 'added_at')
+
+    def total_price(self, obj):
+        return f"{obj.total_price} €"
+    total_price.short_description = 'Prix Total'
+
+
+# FIN
 
 @admin.register(Statistic)
 class StatisticAdmin(admin.ModelAdmin):

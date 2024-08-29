@@ -69,12 +69,7 @@ class User(AbstractUser):
 
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
 
-    def _str_(self):
-        return self.name
     
 
 
@@ -92,6 +87,29 @@ class Profile(models.Model):
 
 
 
+# Model par PRIMAEL DOHA 
+
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+
+    def _str_(self):
+        return self.name
+
+
+
+class Panier(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='paniers')
+    course = models.ForeignKey('Course', on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.course.title} - {self.user.username}"
+
+    @property
+    def total_price(self):
+        return self.course.price * self.quantity
 
 class Course(models.Model):
     
@@ -104,13 +122,34 @@ class Course(models.Model):
     total_points = models.PositiveIntegerField(default=0, verbose_name="Points totaux")
     created_at = models.DateTimeField(auto_now_add=True)
     students = models.ManyToManyField(User)
+    image = models.ImageField(upload_to='category_images/', null=True, blank=True)
+    additional_info = models.TextField(verbose_name="Informations supplémentaires", blank=True)
+    prerequisites = models.TextField(verbose_name="Prérequis", blank=True)
+    syllabus = models.TextField(verbose_name="Syllabus", blank=True)
+    duration = models.TimeField(verbose_name="Durée", blank=True, null=True)  # Changement en TimeField
+    date = models.DateField(verbose_name="Date du cours", blank=True, null=True)  # Nouveau champ
+    certificat = models.BooleanField(verbose_name="Certificat", default=False)  # Nouveau champ booléen
+    quiz = models.BooleanField(verbose_name="Quiz", default=False)  # Nouveau champ booléen
+    language = models.CharField(max_length=100, verbose_name="Langue", blank=True)  # Nouveau champ
     progress = models.IntegerField(default=0)
     lessons = models.PositiveIntegerField(default=0, verbose_name="Leçons")  
+    SKILL_LEVEL_CHOICES = [
+        ('basic', 'Basic'),
+        ('intermediate', 'Intermédiaire'),
+        ('advanced', 'Élevé'),
+    ]
+    skill_level = models.CharField(
+        max_length=20,
+        choices=SKILL_LEVEL_CHOICES,
+        verbose_name="Niveau de compétence",
+        default='basic',
+    )  # Nouveau champ avec des choix
+
     
     def _str_(self):
         return self.title
  
-     
+     # FIN 
   
   
   

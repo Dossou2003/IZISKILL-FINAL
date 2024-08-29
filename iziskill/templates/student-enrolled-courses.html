@@ -1,4 +1,4 @@
-{% extends 'base_dashboard.html' %}
+{% extends 'base.html' %}
 {% block content %}
 {% load static %}
 
@@ -114,7 +114,7 @@
                                                     <div class="progress">
                                                         <div class="progress-bar" role="progressbar"
                                                             aria-valuenow="{{ course.progress }}" aria-valuemin="0"
-                                                            aria-valuemax="100" style="width: {{ course.progress }} ; ">
+                                                            aria-valuemax="100" style="width: {{ course.progress }};">
                                                             {{ course.progress }}% Complete
                                                         </div>
                                                     </div>
@@ -135,7 +135,7 @@
                                             <div class="gridarea__wraper">
                                                 <div class="gridarea__img">
 
-                                                    <a href="{% url 'courses_details' %}"><img loading="lazy"
+                                                    <a href=""><img loading="lazy"
                                                             src="{% static 'img/grid/grid_1.png' %}" alt="grid"></a>
                                                     <div class="gridarea__small__button">
                                                         <div class="grid__badge">Data &amp; Tech</div>
@@ -158,7 +158,7 @@
                                                     </div>
                                                     <div class="gridarea__heading">
                                                         <h3>
-                                                            <a href="{% url 'courses_details' %}">Foundation
+                                                            <a href="">Foundation
                                                                 course to under stand
                                                                 about softwere</a>
                                                         </h3>
@@ -279,7 +279,7 @@
                                             <div class="gridarea__wraper">
                                                 <div class="gridarea__img">
 
-                                                    <a href="{% url 'courses_details' %}"><img loading="lazy"
+                                                    <a href=""><img loading="lazy"
                                                             src="{% static 'img/grid/grid_1.png' %}" alt="grid"></a>
                                                     <div class="gridarea__small__button">
                                                         <div class="grid__badge">Data &amp; Tech</div>
@@ -302,7 +302,7 @@
                                                     </div>
                                                     <div class="gridarea__heading">
                                                         <h3>
-                                                            <a href="{% url 'courses_details' %}">Foundation
+                                                            <a href="">Foundation
                                                                 course to under stand
                                                                 about softwere</a>
                                                         </h3>

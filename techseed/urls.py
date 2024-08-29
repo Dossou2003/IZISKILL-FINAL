@@ -36,7 +36,7 @@ urlpatterns = [
 
     path('course_dark/',views.course_dark, name="course_dark"),
 
-    path('courses_details/',views.courses_details, name="courses_details"),
+   path('courses_details/<int:id>/', views.courses_details, name='courses_details'),
 
     path('courses_details_dark/',views.courses_details_dark, name="courses_details_dark"),
 
@@ -257,6 +257,15 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', views.password_reset_confirm, name='password_reset_confirm'),
     path('activate/<uidb64>/<token>/', views.activate, name='activate'),
     path('register/',views.register, name="register"),
+
+
+#Panier DOHA PRIAMEL 
+
+    path('panier/', views.panier_view, name='panier_view'),
+    path('panier/ajouter/<int:course_id>/', views.ajouter_au_panier_view, name='ajouter_au_panier'),
+    path('panier/supprimer/<int:course_id>/', views.supprimer_du_panier_view, name='supprimer_du_panier'),
+    path('payment/', views.payment, name='payment'),
+    
 
 
 

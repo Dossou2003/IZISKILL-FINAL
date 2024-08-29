@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 {% block content %}
 {% load static %}
 
@@ -13,21 +13,25 @@
 
                     <div class="herobannerarea__title">
                         <div class="herobannerarea__small__title">
-                            <span>Education Solution</span>
+                            <span>Solution Educative</span>
                         </div>
                         <div class="herobannerarea__title__heading__2 herobannerarea__title__heading__3">
-                            <h2>Your Awesome<span> Online </span>Course</h2>
+                            <h2>Votre Super Cours en<span> ligne </span></h2>
                         </div>
                     </div>
 
 
                     <div class="herobannerarea__text herobannerarea__text__2">
-                        <p>Lorem Ipsum is simply dummy text of the printing typesetting <br>industry. Lorem
-                            Ipsum has been </p>
+                        <p>Grace a cette plateforme, vous serez capable de comprendre des
+                            conceptes abordées en classes ou difficultées rencontré lors
+                            de votre apprentissage scolaire ... profiter de votre temps
+                            pour apprendre et vous faire assisté par des experts en leurs
+                            domaines pour un apprentissages plus aisés 
+                        </p>
                     </div>
                     <div class="hreobannerarea__button__2">
-                        <a class="default__button" href="{% url 'login' %}">View Courses</a>
-                        <a class="default__button hreobannerarea__button__3" href="{% url 'login' %}">Explore More</a>
+                        <a class="default__button" href="{% url 'login' %}">Voir les cours</a>
+                        <a class="default__button hreobannerarea__button__3" href="{% url 'login' %}">En savoir plus</a>
                     </div>
                 </div>
             </div>
@@ -148,8 +152,8 @@
                     </div>
                 </div>
                 <div class="service__content">
-                    <h3><a href="{% url 'courses_details' %}">Business Studies</a></h3>
-                    <p>Business is succes</p>
+                    <h3><a href="">Etude des Affaires</a></h3>
+                    <p>Les afaaires est un succès</p>
                 </div>
                 <div class="service__small__img">
                     <svg class="icon__hover__img" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -204,8 +208,8 @@
                     </div>
                 </div>
                 <div class="service__content">
-                    <h3><a href="{% url 'courses_details' %}">Programming Tech</a></h3>
-                    <p>update your skill</p>
+                    <h3><a href="">Programmation & Tech</a></h3>
+                    <p>Mettre a jours ces compétences</p>
                 </div>
                 <div class="service__small__img">
                     <svg class="icon__hover__img" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -244,8 +248,8 @@
                     </div>
                 </div>
                 <div class="service__content">
-                    <h3><a href="{% url 'courses_details' %}">Artist & Design</a></h3>
-                    <p>show creativity</p>
+                    <h3><a href="">Artist & Design</a></h3>
+                    <p>Faire preuves de creativite</p>
                 </div>
                 <div class="service__small__img">
                     <svg class="icon__hover__img" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -279,8 +283,8 @@
                     </div>
                 </div>
                 <div class="service__content">
-                    <h3><a href="{% url 'courses_details' %}">Machine Learning</a></h3>
-                    <p>Science is power</p>
+                    <h3><a href="">Apprentissage automatiques</a></h3>
+                    <p>La science c'est le pouvoir</p>
                 </div>
                 <div class="service__small__img">
                     <svg class="icon__hover__img" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -320,8 +324,8 @@
                     </div>
                 </div>
                 <div class="service__content">
-                    <h3><a href="{% url 'courses_details' %}">Health & Fitness</a></h3>
-                    <p>health is wealth</p>
+                    <h3><a href="">Santé et Forme physique</a></h3>
+                    <p>La santé c'est la richesses</p>
                 </div>
                 <div class="service__small__img">
                     <svg class="icon__hover__img" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -361,8 +365,8 @@
                     </div>
                 </div>
                 <div class="service__content">
-                    <h3><a href="{% url 'courses_details' %}">Health & Fitness</a></h3>
-                    <p>health is wealth</p>
+                    <h3><a href="">Santé et forme Physique</a></h3>
+                    <p>La santé, c'est la richesse</p>
                 </div>
                 <div class="service__small__img">
                     <svg class="icon__hover__img" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -410,8 +414,8 @@
                     </div>
                 </div>
                 <div class="service__content">
-                    <h3><a href="{% url 'courses_details' %}">Marketing Analysis</a></h3>
-                    <p>Science is power</p>
+                    <h3><a href="">Marketing et Analyses</a></h3>
+                    <p>La science c'est le pouvoir</p>
                 </div>
                 <div class="service__small__img">
                     <svg class="icon__hover__img" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -454,7 +458,7 @@
                     </div>
                 </div>
                 <div class="service__content">
-                    <h3><a href="{% url 'courses_details' %}">Business Studies</a></h3>
+                    <h3><a href="">Etudes des affaires</a></h3>
                     <p>Business is succes</p>
                 </div>
                 <div class="service__small__img">
@@ -489,11 +493,10 @@
                 <div class="registerarea__wraper">
                     <div class="section__title registerarea__section__title">
                         <div class="section__title__button">
-                            <div class="default__small__button">Course List</div>
+                            <div class="default__small__button">Liste des cours</div>
                         </div>
                         <div class="section__title__heading heading__underline">
-                            <h2>Register Your <span>Account </span>Get free access to <small>60000</small>
-                                online course
+                            <h2>Enregistrez votre<span>Compte </span>Obtenez un accès gratuit au cours en ligne<small>60000</small>
                             </h2>
                         </div>
                     </div>
@@ -504,7 +507,7 @@
                                         loading="lazy" src="{% static 'img/icon/video.png' %}" alt=""></a>
                             </div>
                             <div class="registerarea__para">
-                                <p>Learn Something new & Build Your Career From Anywhere In The World</p>
+                                <p>Apprenez quelques chose de nouveau et construisez votre carrière de n'importe ou dans le monde</p>
                             </div>
 
                         </div>
@@ -517,23 +520,23 @@
             <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12" data-aos="fade-up">
                 <div class="registerarea__form">
                     <div class="registerarea__form__heading">
-                        <h4>Fill Your Registration</h4>
+                        <h4>Remplissez votre inscription</h4>
                     </div>
                     <form action="#">
-                        <input class="register__input" type="text" placeholder="Your Name">
+                        <input class="register__input" type="text" placeholder="votre nom ">
                         <div class="row">
                             <div class="col-xl-6">
-                                <input class="register__input" type="text" placeholder="Email Address">
+                                <input class="register__input" type="text" placeholder="Adresse email">
                             </div>
                             <div class="col-xl-6">
-                                <input class="register__input" type="text" placeholder="Phone">
+                                <input class="register__input" type="text" placeholder="Telephone">
                             </div>
                         </div>
-                        <input class="register__input" type="text" placeholder="Address">
+                        <input class="register__input" type="text" placeholder="Addresse">
                         <textarea class="register__input textarea" name="#" id="#" cols="30"
-                            rows="10">Comment</textarea>
+                            rows="10">Commentaire</textarea>
                         <div class="registerarea__button">
-                            <a class="default__button" href="#">Sign Up
+                            <a class="default__button" href="#">S'enregistrer
                                 <i class="icofont-long-arrow-right"></i>
                             </a>
                         </div>
@@ -558,10 +561,10 @@
             <div class="col-xl-12" data-aos="fade-up">
                 <div class="section__title__2 text-center teamarea__margin">
                     <div class="section__small__title">
-                        <span>Expert teacher</span>
+                        <span>Enseignant expert</span>
                     </div>
                     <div class="section__title__heading__2 section__title__heading__3 heading__fontsize__2">
-                        <h2>Our Expert Teacher</h2>
+                        <h2>Notre professeur expert</h2>
                     </div>
                 </div>
             </div>
@@ -590,7 +593,7 @@
                         </div>
                     </div>
                     <div class="teamarea__content">
-                        <p>INTERIOR DESIGNER</p>
+                        <p>ARCHITECTE</p>
                         <h5> <a href="{}">Mirnsdo Jons</a></h5>
                     </div>
                 </div>
@@ -618,7 +621,7 @@
                         </div>
                     </div>
                     <div class="teamarea__content">
-                        <p>INTERIOR DESIGNER</p>
+                        <p>ARCHITECTE</p>
                         <h5> <a href="{}">Daniel Rock</a></h5>
                     </div>
                 </div>
@@ -665,20 +668,20 @@
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                 <div class="section__title__2" data-aos="fade-up">
                     <div class="section__small__title">
-                        <span>Education Solution</span>
+                        <span>Solution éducative</span>
                     </div>
                     <div class="section__title__heading__2 section__title__heading__3 heading__fontsize__2">
-                        <h2>Client Testimonial About Our Lms Agency</h2>
+                        <h2>Témoignage client sur notre agence LMS</h2>
                     </div>
                 </div>
 
                 <div class="testimonial__slider__active__3" data-aos="fade-up">
                     <div class="testimonialarea__paragraph__3 ">
-                        <p class="testimonial__quote"><i class="icofont-quote-left quote__left"></i>The other
-                            hand we denounce with righteou indg ation and dislike men who are so beguiled and
-                            demorali ed by the of pleasure of the moment.Dislike men who are so beguiled and
-                            demoraliz worlds ed by the charms of pleasure of the moment. Lorem ipsum dolor sit
-                            amet, consec elit.<i class="icofont-quote-right quote__right"></i></p>
+                        <p class="testimonial__quote"><i class="icofont-quote-left quote__left"></i>
+                            Cette plateforme est fantastique! elle m'aide a mieux assimilé mes notions
+                            qui me poses probleme et avec l'aide des mentor mis en notre disposition
+                            tous ce retrouve plus facile§ je vous la recommande fortement!
+                            .<i class="icofont-quote-right quote__right"></i></p>
 
                         <div class="testimonialarea__person__3">
                             <div class="testimonial__img__3">
@@ -686,7 +689,7 @@
                             </div>
                             <div class="testimonial__name">
                                 <h6> <a href="{}">Mirnsdo Jons</a></h6>
-                                <span>Ui/Ux Designer</span>
+                                <span>Concepteur UI/UX</span>
                             </div>
                         </div>
 
@@ -747,10 +750,10 @@
             <div class="col-xl-12" data-aos="fade-up">
                 <div class="section__title__2 text-center teamarea__margin">
                     <div class="section__small__title">
-                        <span>News & Blog</span>
+                        <span>Actualités & Blog</span>
                     </div>
                     <div class="section__title__heading__2 section__title__heading__3 heading__fontsize__2">
-                        <h2>Latest News & Blogs</h2>
+                        <h2>Dernières nouvelles et blogs</h2>
                     </div>
                 </div>
             </div>
@@ -761,11 +764,11 @@
                     <div class="single__blog__img">
                         <img loading="lazy" src="{% static 'img/blog/blog_5.png' %}" alt="blog">
                         <div class="single__blog__button">
-                            <a class="default__button" href="#">Story</a>
+                            <a class="default__button" href="#">HIstoire</a>
                         </div>
                     </div>
                     <div class="single__blog__content">
-                        <p>13 january 2024</p>
+                        <p>13 janvier 2024</p>
                         <h4> <a href="{}">Facebook design is dedicated to what's new in design </a></h4>
                         <div class="single__blog__bottom__button">
                             <a href="{}">Read More
@@ -817,7 +820,7 @@
             </div>
             <div class="col-xl-12" data-aos="fade-up">
                 <div class="blogarea__bottom__button">
-                    <a class="default__button" href="#">MORE BLOG</a>
+                    <a class="default__button" href="#">PLUS DE BLOG</a>
                 </div>
             </div>
         </div>
