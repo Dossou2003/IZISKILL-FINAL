@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import User
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 
 from .models import Profile
@@ -88,8 +90,6 @@ class CustomSetPasswordForm(SetPasswordForm):
 
 
 
-from django import forms
-from django.contrib.auth.models import User
 
 class CustomUserUpdateForm(forms.ModelForm):
     bio = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Que voulez-vous dire sur vous-même'}))
