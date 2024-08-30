@@ -173,27 +173,6 @@ def password_reset_done(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #  about par DOHA Primael
 
 def about(request):
@@ -283,7 +262,7 @@ def ajouter_au_panier(request, course_id):
             
 def ajouter_au_panier_view(request, course_id):
     ajouter_au_panier(request, course_id)
-    return redirect('panier_view')
+    return redirect('cart')
 
 def supprimer_du_panier(request, course_id):
     course = Course.objects.get(id=course_id)
@@ -298,11 +277,31 @@ def supprimer_du_panier(request, course_id):
             
 def supprimer_du_panier_view(request, course_id):
     supprimer_du_panier(request, course_id)
-    return redirect('panier_view')
+    return redirect('cart')
 
 def payment(request):
-    return render(request, 'payment.html')
+    paniers = Panier.objects.filter(user=request.user)
+    total = sum(item.total_price for item in paniers)
+    return render(request, 'payment.html', {'paniers': paniers, 'total': total, 'course': course})
 
+def cart(request):
+    courses = Course.objects.all()  # Récupère tous les objets Course
+    for course in courses:
+        if not course.image:
+            # Gérer les cas où il n'y a pas d'image associée
+            course.image_url = None
+        else:
+            course.image_url = course.image.url
+
+    paniers = Panier.objects.filter(user=request.user)
+    total = sum(item.total_price for item in paniers)
+    
+    
+    return render(request, 'cart.html', {'paniers': paniers, 'total': total, 'courses' : courses})
+    
+
+def cart_dark(request):
+    return render(request, 'cart-dark.html')
 
 
 
@@ -647,11 +646,7 @@ def student_wishlist(request):
 
 
 # E-COMMERCE par DOHA Primael 
-def cart(request):
-    return render(request, 'cart.html')
 
-def cart_dark(request):
-    return render(request, 'cart-dark.html')
 
 def checkout(request):
     return render(request, 'checkout.html')
