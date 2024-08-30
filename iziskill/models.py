@@ -112,7 +112,19 @@ class Panier(models.Model):
         return self.course.price * self.quantity
 
 class Course(models.Model):
-    
+    STATUS_CHOICES = [
+        ('active', 'Active'),
+        ('completed', 'Completed'),
+        ('draft', 'Draft'),
+    ]
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='draft',
+        verbose_name="Statut"
+    )
+
+    # Les autres champs de votre modèle
     title = models.CharField(max_length=255, verbose_name="Titre du cours")
     description = models.TextField(verbose_name="Description")
     instructor = models.ForeignKey(User, related_name='instructed_courses', on_delete=models.SET_NULL, null=True, limit_choices_to={'status': 'mentor'})
@@ -126,30 +138,26 @@ class Course(models.Model):
     additional_info = models.TextField(verbose_name="Informations supplémentaires", blank=True)
     prerequisites = models.TextField(verbose_name="Prérequis", blank=True)
     syllabus = models.TextField(verbose_name="Syllabus", blank=True)
-    duration = models.TimeField(verbose_name="Durée", blank=True, null=True)  # Changement en TimeField
-    date = models.DateField(verbose_name="Date du cours", blank=True, null=True)  # Nouveau champ
-    certificat = models.BooleanField(verbose_name="Certificat", default=False)  # Nouveau champ booléen
-    quiz = models.BooleanField(verbose_name="Quiz", default=False)  # Nouveau champ booléen
-    language = models.CharField(max_length=100, verbose_name="Langue", blank=True)  # Nouveau champ
+    duration = models.TimeField(verbose_name="Durée", blank=True, null=True)
+    date = models.DateField(verbose_name="Date du cours", blank=True, null=True)
+    certificat = models.BooleanField(verbose_name="Certificat", default=False)
+    quiz = models.BooleanField(verbose_name="Quiz", default=False)
+    language = models.CharField(max_length=100, verbose_name="Langue", blank=True)
     progress = models.IntegerField(default=0)
-    lessons = models.PositiveIntegerField(default=0, verbose_name="Leçons")  
-    SKILL_LEVEL_CHOICES = [
-        ('basic', 'Basic'),
-        ('intermediate', 'Intermédiaire'),
-        ('advanced', 'Élevé'),
-    ]
+    lessons = models.PositiveIntegerField(default=0, verbose_name="Leçons")
     skill_level = models.CharField(
         max_length=20,
-        choices=SKILL_LEVEL_CHOICES,
+        choices=[
+            ('basic', 'Basic'),
+            ('intermediate', 'Intermédiaire'),
+            ('advanced', 'Élevé'),
+        ],
         verbose_name="Niveau de compétence",
         default='basic',
-    )  # Nouveau champ avec des choix
+    )
 
-    
-    def _str_(self):
+    def __str__(self):
         return self.title
- 
-     # FIN 
   
   
   
@@ -371,3 +379,23 @@ class Award(models.Model):
     
     def _str_(self):
         return self.title
+
+class Room(models.Model):
+    name = models.CharField(max_length=20)
+    slug = models.SlugField(max_length=100)
+
+
+    def __str__(self):
+        return "Room : "+ self.name + " | Id : " + self.slug
+
+    
+
+class Messager(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return "Message is :- "+ self.content

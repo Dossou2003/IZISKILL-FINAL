@@ -1,0 +1,139 @@
+
+{% extends 'base_dashboard.html' %}
+{% block content %}
+{% load static %}
+
+        <!-- theme fixed shadow -->
+        <!-- breadcrumbarea__section__start -->
+
+
+        <!--
+        <div class="breadcrumbarea">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="breadcrumb__content__wraper" data-aos="fade-up">
+                            <div class="breadcrumb__title">
+                                <h2 class="heading">Instructor Ddashboard</h2>
+                            </div>
+                            <div class="breadcrumb__inner">
+                                <ul>
+                                    <li><a href="{% url 'index'}">
+Home</a></li>
+                                    <li>instructor-dashboard</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shape__icon__2">
+                <img loading="lazy"  class=" shape__icon__img shape__icon__img__1" 
+
+src="{% static 'img/herobanner/herobanner__1.png' %}"
+ alt="photo">
+                <img loading="lazy"  class=" shape__icon__img shape__icon__img__2" 
+
+src="{% static 'img/herobanner/herobanner__2.png' %}"
+ alt="photo">
+                <img loading="lazy"  class=" shape__icon__img shape__icon__img__3" 
+
+src="{% static 'img/herobanner/herobanner__3.png' %}"
+ alt="photo">
+                <img loading="lazy"  class=" shape__icon__img shape__icon__img__4" 
+
+src="{% static 'img/herobanner/herobanner__5.png' %}"
+ alt="photo">
+            </div>
+
+        </div>
+        -->
+
+
+        <!-- dashboardarea__area__start  -->
+        <div class="dashboardarea sp_bottom_100">
+             <!-- ======================Tableau de bord pour l'apprenant========================= -->
+                {% include 'sidebar.html' %}
+
+            <div class="dashboard">
+                <div class="container-fluid full__width__padding">
+                    <div class="row">
+                        <!-- ==================== pour la table de gauche======================================= -->
+                {% include  'dashboard__inner.html' %}  
+
+                        <div class="col-xl-9 col-lg-9 col-md-12">
+                            <div class="dashboard__message__content__main">
+                                <div
+                                    class="dashboard__message__content__main__title dashboard__message__content__main__title__2">
+                                    <h3>Messages</h3>
+
+                                </div>
+                                <div class="dashboard__meessage__wraper">
+                                    <div class="row">
+                                        <div class="col-xl-5 col-lg-6 col-md-12 col-12">
+                                            <div class="dashboard__meessage">
+                                                <div class="dashboard__meessage__chat">
+                                                    <h3>Chats</h3>
+                                                </div>
+                                                <div class="dashboard__meessage__search">
+                                                    <button><i class="icofont-search-1"></i></button>
+                                                    <input type="text" placeholder="Search">
+                                                </div>
+
+                                                <div class="dashboard__meessage__contact">
+                                                    <ul>
+                                                        {% if rooms %}
+                                                        {% for room in rooms %}
+                                                        <li>
+                                                            <div class="dashboard__meessage__contact__wrap">
+                                                                <div class="dashboard__meessage__chat__img">
+                                                                <span class="dashboard__meessage__dot online"></span>
+                                                                <img loading="lazy"  src="{% static 'img/teacher/teacher__1.png' %}"alt="">
+                                                            </div>
+                                                                <div class="dashboard__meessage__meta">
+                                                                    <h5><a href="/{{room.slug}}">{{ room.name }}</a></h5>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            {% endfor %}
+                                                    {% else %}
+                                                            <b>No Chats .</b>
+                                                    {% endif %}
+                                                    <div class="default__button login__button__1">
+                                                        <button onclick="window.location.href='{% url 'user_list' %}'">+</button>
+                                                    </div>
+                                                       
+                                                        
+                                                       
+                                                       
+
+                                                       
+                                                
+                                                
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- dashboardarea__area__end   -->
+
+    {% endblock %}
+        
+
+
+    
+
+
+
+ 

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_dashboard.html' %}
 {% block content %}
 {% load static %}
 
@@ -121,13 +121,15 @@ src="{% static 'img/herobanner/herobanner__5.png' %}"
                                                 
 
                                                     
-                                                        
+                                                    <form class="mx-1 mx-md-4" action="{% url 'student_settings' %}" method="POST" enctype="multipart/form-data">   
+                                                        {% csrf_token %} 
                                                         <div class="row">
                                                             <div class="col-xl-6">
                                                                 <div class="dashboard__form__wraper">
                                                                     <div class="dashboard__form__input">
                                                                         <label for="#">First Name</label>
-                                                                        <input type="text" placeholder="John">
+                                                                        {{ form.first_name }}
+                                                                        <div class="text-danger">{{ form.first_name.errors }}</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -136,7 +138,8 @@ src="{% static 'img/herobanner/herobanner__5.png' %}"
                                                                 <div class="dashboard__form__wraper">
                                                                     <div class="dashboard__form__input">
                                                                         <label for="#">Last Name</label>
-                                                                        <input type="text" placeholder="Due">
+                                                                        {{ form.last_name }}
+                                                                        <div class="text-danger">{{ form.last_name.errors }}</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -145,7 +148,8 @@ src="{% static 'img/herobanner/herobanner__5.png' %}"
                                                                 <div class="dashboard__form__wraper">
                                                                     <div class="dashboard__form__input">
                                                                         <label for="#">User Name</label>
-                                                                        <input type="text" placeholder="johndue">
+                                                                        {{ form.username }}
+                                                                        <div class="text-danger">{{ form.username.errors }}</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -154,7 +158,8 @@ src="{% static 'img/herobanner/herobanner__5.png' %}"
                                                                 <div class="dashboard__form__wraper">
                                                                     <div class="dashboard__form__input">
                                                                         <label for="#">Phone Number</label>
-                                                                        <input type="text" placeholder="+1-202-555-0174">
+                                                                        {{ form.phone_number }}
+                                                                        <div class="text-danger">{{ form.phone_number.errors }}</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -163,8 +168,8 @@ src="{% static 'img/herobanner/herobanner__5.png' %}"
                                                                 <div class="dashboard__form__wraper">
                                                                     <div class="dashboard__form__input">
                                                                         <label for="#">Skill/Occupation</label>
-                                                                        <input type="text"
-                                                                            placeholder="Full Stack Developer">
+                                                                        {{ form.occupation }}
+                                                                        <div class="text-danger">{{ form.occupation.errors }}</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -173,7 +178,8 @@ src="{% static 'img/herobanner/herobanner__5.png' %}"
                                                                 <div class="dashboard__form__wraper">
                                                                     <div class="dashboard__form__input">
                                                                         <label for="#">Display Name Publicly As</label>
-                                                                        <input type="text" placeholder="John">
+                                                                        {{ form.display_name }}
+                                                                        <div class="text-danger">{{ form.display_name.errors }}</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -181,15 +187,17 @@ src="{% static 'img/herobanner/herobanner__5.png' %}"
                                                                 <div class="dashboard__form__wraper">
                                                                     <div class="dashboard__form__input">
                                                                         <label for="#">Bio</label>
-                                                                        <textarea name="" id="" cols="30"
-                                                                            rows="10">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</textarea>
+                                                                        {{ form.bio }}
+                                                                        <div class="text-danger">{{ form.bio.errors }}</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-xl-12">
                                                                 <div class="dashboard__form__button">
-                                                                    <a class="default__button" href="#">Update Info</a>
+                                                                    
+                                                                    <button type="submit" class="default__button">Mettre a jour</button>
                                                                 </div>
+                                                            
                                                             </div>
                                                         </div>
                                                     
@@ -206,7 +214,7 @@ src="{% static 'img/herobanner/herobanner__5.png' %}"
                                                     <div class="dashboard__form__wraper">
                                                         <div class="dashboard__form__input">
                                                             <label for="#">Current Password</label>
-                                                            <input type="text" placeholder="Current password">
+                                                            {{ form.old_password }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -215,7 +223,7 @@ src="{% static 'img/herobanner/herobanner__5.png' %}"
                                                     <div class="dashboard__form__wraper">
                                                         <div class="dashboard__form__input">
                                                             <label for="#">New Password</label>
-                                                            <input type="text" placeholder="New Password">
+                                                            {{ form.new_password1 }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -224,7 +232,7 @@ src="{% static 'img/herobanner/herobanner__5.png' %}"
                                                     <div class="dashboard__form__wraper">
                                                         <div class="dashboard__form__input">
                                                             <label for="#">Re-Type New Password</label>
-                                                            <input type="text" placeholder="Re-Type New Password">
+                                                            {{ form.new_password2 }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -256,7 +264,8 @@ src="{% static 'img/herobanner/herobanner__5.png' %}"
                                                                     </path>
                                                                 </svg>
                                                                 Facebook</label>
-                                                            <input type="text" placeholder="https://facebook.com/">
+                                                                {{ form.facebook }}
+                                                                <div class="text-danger">{{ form.facebook.errors }}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -275,7 +284,8 @@ src="{% static 'img/herobanner/herobanner__5.png' %}"
                                                                     </path>
                                                                 </svg>
                                                                 Twitter</label>
-                                                            <input type="text" placeholder="https://twitter.com/">
+                                                                {{ form.twitter }}
+                                                                <div class="text-danger">{{ form.twitter.errors }}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -296,7 +306,8 @@ src="{% static 'img/herobanner/herobanner__5.png' %}"
                                                                     <circle cx="4" cy="4" r="2"></circle>
                                                                 </svg>
                                                                 Linkedin</label>
-                                                            <input type="text" placeholder="https://linkedin.com/">
+                                                                {{ form.linkedin }}
+                                                                <div class="text-danger">{{ form.linkedin.errors }}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -345,8 +356,9 @@ src="{% static 'img/herobanner/herobanner__5.png' %}"
                                                 </div>
                                                 <div class="col-xl-12">
                                                     <div class="dashboard__form__button">
-                                                        <a class="default__button" href="#">Update Password</a>
+                                                        <button type="submit" class="default__button">Mettre a jour</button>
                                                     </div>
+                                                </form>
                                                 </div>
 
 

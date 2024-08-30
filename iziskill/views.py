@@ -30,6 +30,7 @@ from django.template.loader import render_to_string
 from .forms import CustomPasswordResetForm, CustomSetPasswordForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from .forms import CustomUserUpdateForm
 
 
 
@@ -507,26 +508,24 @@ def instructor_dashboard(request):
         # Données de l'instructeur
         instructor_courses = Course.objects.filter(instructor=instructor)
         total_courses = instructor_courses.count()
-        active_courses = instructor_courses.filter(  # Assurez-vous d'avoir un champ 'status' dans votre modèle Course
-            status='active'  
-        ).count()
-        completed_courses = instructor_courses.filter(
-            status='completed'  
-        ).count()
+        
+        # Filtrage des cours par 'status'
+        active_courses = instructor_courses.filter(status='active').count()
+        completed_courses = instructor_courses.filter(status='completed').count()
+        
+        # Calcul du nombre total d'étudiants
         total_students = sum(course.students.count() for course in instructor_courses)
-        total_earnings = (
-            sum(course.total_points for course in instructor_courses)
-            # Ou calculez les gains réels si vous avez cette information dans votre modèle
-        )
+        
+        # Calcul des gains totaux (ou ajustez selon vos besoins)
+        total_earnings = sum(course.total_points for course in instructor_courses)
 
-        # Témoignages des clients
-        testimonials = ClientTestimonial.objects.all()  # Ou filtrez si nécessaire
+        # Témoignages des clients (filtrez si nécessaire)
+        testimonials = ClientTestimonial.objects.all()
 
-        # Récompenses
-        awards = Award.objects.filter(  # Vous pourriez vouloir filtrer par instructeur si nécessaire
-            # ... 
-        )
+        # Récompenses (filtrez par instructeur si nécessaire)
+        awards = Award.objects.all()
 
+        # Contexte à passer au template
         context = {
             'instructor': instructor,
             'total_courses': total_courses,
@@ -537,7 +536,7 @@ def instructor_dashboard(request):
             'testimonials': testimonials,
             'awards': awards,
         }
-        return render(request, 'instructor_dashboard.html', context)
+        return render(request, 'instructor-dashboard.html', context)
     else:
         return redirect('login')
 
@@ -549,9 +548,6 @@ def instructor_dashboard(request):
 
 
 
-
-def instructor_dashboard(request):
-    return render(request, 'instructor-dashboard.html')
 
 def instructor_message(request):
     return render(request, 'instructor-message.html')
@@ -637,8 +633,25 @@ def student_profile(request):
 def student_reviews(request):
     return render(request, 'student-reviews.html')
 
+
+
 def student_settings(request):
-    return render(request, 'student-settings.html')
+    user = request.user
+    if request.method == 'POST':
+        form = CustomUserUpdateForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('student_profile')
+        else:
+            print(form.errors)
+          # Redirige vers la page de profil ou une autre page après la mise à jour
+    else:
+        
+        form = CustomUserUpdateForm(instance=request.user)
+
+    return render(request, 'student-settings.html', {'form': form})
+
+
 
 def student_wishlist(request):
     return render(request, 'student-wishlist.html')
@@ -716,3 +729,31 @@ def dashboard(request):
     else:
         # Optionnel : Si un autre type d'utilisateur existe, gérer ici
         return render(request, 'dashboard_default.html', {'user': request.user})
+    
+def room(request, slug):
+    room_name=Room.objects.get(slug=slug).name
+    messages=Messager.objects.filter(room=Room.objects.get(slug=slug))
+    return render(request, "student-message.html",{"room_name":room_name,"slug":slug,'messages':messages})
+
+
+def conversation(request):
+    rooms = Room.objects.all()
+    return render(request, 'student-conversation.html', {'rooms': rooms})
+
+
+def user_list(request):
+        userss = User.objects.all()
+        return render(request, 'user_list.html', {'userss': userss})
+
+
+def get_or_create_room(request, username1, username2):
+    # Assurez-vous que les utilisateurs sont triés par ordre alphabétique
+    usernames = sorted([username1, username2])
+    room_name = f"{usernames[0]}_{usernames[1]}"
+    room, created = Room.objects.get_or_create(slug=room_name, defaults={'name': room_name})
+
+    return redirect(reverse('room_detail', args=[room.slug]))
+
+def room_list(request):
+    rooms = Room.objects.all()
+    return render(request, 'student-message.html', {'rooms': rooms})

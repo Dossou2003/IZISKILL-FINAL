@@ -265,7 +265,16 @@ urlpatterns = [
     path('panier/ajouter/<int:course_id>/', views.ajouter_au_panier_view, name='ajouter_au_panier'),
     path('panier/supprimer/<int:course_id>/', views.supprimer_du_panier_view, name='supprimer_du_panier'),
     path('payment/', views.payment, name='payment'),
-    
+   
+   
+
+    path('conversation/', views.conversation, name='conversation'),
+    path('user_list', views.user_list, name='user_list'),
+    path('create_or_open_room/<str:username1>/<str:username2>/', views.get_or_create_room, name='get_or_create_room'),
+    path('room_list', views.room_list, name='room_list'),
+    path('<str:slug>', views.room, name='room_detail'),
+
+ 
 
 
 

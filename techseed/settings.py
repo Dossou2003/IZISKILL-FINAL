@@ -25,6 +25,8 @@ ALLOWED_HOSTS = ['192.168.25.223', '127.0.0.1']
 
 INSTALLED_APPS = [
     'jazzmin',
+    'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -33,6 +35,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'iziskill',
 ]
+
+
+ASGI_APPLICATION = 'techseed.asgi.application'
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -71,127 +71,26 @@ class CustomSetPasswordForm(SetPasswordForm):
 
 
 
-class UpdateUserForm(forms.ModelForm):
-    first_name = forms.CharField(
-        max_length=30,
-        required=False,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'John'}),
-        help_text='Optional'
-    )
-    last_name = forms.CharField(
-        max_length=30,
-        required=False,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Doe'}),
-        help_text='Optional'
-    )
-    username = forms.CharField(
-        max_length=255,
-        required=True,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'johndoe'}),
-        help_text='Required'
-    )
-    phone_number = forms.CharField(
-        max_length=15,
-        required=False,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '+1-202-555-0174'}),
-        help_text='Optional'
-    )
-    occupation = forms.CharField(
-        max_length=255,
-        required=False,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Full Stack Developer'}),
-        help_text='Optional'
-    )
-    display_name = forms.CharField(
-        max_length=255,
-        required=False,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'John'}),
-        help_text='Optional'
-    )
-    bio = forms.CharField(
-        required=False,
-        widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Tell us about yourself', 'rows': 10}),
-        help_text='Optional'
-    )
+from django import forms
+from django.contrib.auth.models import User
 
-    # Champs pour les réseaux sociaux
-    facebook = forms.URLField(
-        max_length=200,
-        required=False,
-        widget=forms.URLInput(attrs={'class': 'form-control'}),
-        help_text='Facebook profile URL'
-    )
-    twitter = forms.URLField(
-        max_length=200,
-        required=False,
-        widget=forms.URLInput(attrs={'class': 'form-control'}),
-        help_text='Twitter profile URL'
-    )
-    linkedin = forms.URLField(
-        max_length=200,
-        required=False,
-        widget=forms.URLInput(attrs={'class': 'form-control'}),
-        help_text='LinkedIn profile URL'
-    )
-    instagram = forms.URLField(
-        max_length=200,
-        required=False,
-        widget=forms.URLInput(attrs={'class': 'form-control'}),
-        help_text='Instagram profile URL'
-    )
-    
-    
-    email = forms.EmailField(
-        max_length=254,
-        required=True,
-        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'example@example.com'}),
-        help_text='Required. Provide a valid email address.'
-    )
-    password = forms.CharField(
-        required=False,
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'New password'}),
-        help_text='Leave blank if you do not want to change your password.'
-    )
-
+class CustomUserUpdateForm(forms.ModelForm):
+    bio = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Que voulez-vous dire sur vous-même'}))
+    phone_number = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''}))
+    twitter = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''}))
+    occupation = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''}))
+    display_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''}))
+    facebook = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''}))
+    linkedin = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''}))
+    image = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control-file'}))
     class Meta:
         model = User
         fields = [
-            'first_name', 'last_name', 'email', 'password', 
-            'phone_number', 'occupation', 'display_name', 'bio',
-            'facebook', 'twitter', 'linkedin', 'instagram'
+            'username', 'first_name', 'last_name', 'email', 'phone_number',
+            'occupation', 'display_name', 'bio', 'facebook', 'twitter', 
+            'linkedin', 'image'
         ]
-        
-        
-        
-
-    def save(self, commit=True):
-        user = self.instance.user  # Assuming Profile has a `user` OneToOneField
-        
-        # Mise à jour des champs User
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
-        user.email = self.cleaned_data['email']
-        
-        # Mettre à jour le mot de passe seulement si un nouveau mot de passe a été fourni
-        password = self.cleaned_data['password']
-        if password:
-            user.set_password(password)
-        
-        if commit:
-            user.save()
-            self.instance.save()  # Sauvegarde le Profile
-
-            # Mise à jour des profils de réseaux sociaux
-            Profile.objects.update_or_create(
-                user=user,
-                defaults={
-                    'facebook': self.cleaned_data['facebook'],
-                    'twitter': self.cleaned_data['twitter'],
-                    'linkedin': self.cleaned_data['linkedin'],
-                    'instagram': self.cleaned_data['instagram']
-                }
-            )
-        
-        return user
-
-   
+        widgets = {
+            'bio': forms.Textarea(attrs={'rows': 3}),
+            'image': forms.ClearableFileInput(attrs={'multiple': False}),
+        }

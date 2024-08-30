@@ -10925,7 +10925,7 @@ Breadcrumb Area
 }
 .dashboard__content__wraper {
   box-shadow: 0 0 20px 10px rgba(95, 45, 237, 0.02);
-  padding: 50px 40px;
+  padding: 50px 30px;
   background: var(--whiteColor);
   margin-bottom: 30px;
   border-radius: var(--borderRadius2);
