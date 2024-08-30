@@ -30,8 +30,8 @@
                     </div>
                     <div class="breadcrumb__inner">
                         <ul>
-                            <li><a href="{% url 'index'}">
-                                    Home</a></li>
+                            <li><a href="{% url 'home_5' %}">
+                                    Accueil</a></li>
                             <li>Se connecter</li>
                         </ul>
                     </div>
@@ -88,34 +88,34 @@
                             <form method="post" action="{% url 'login' %}">
                                 {% csrf_token %}
                                 <div class="login__form">
-                                    <label class="form__label">Username</label>
+                                    <label class="form__label">Nom d'utilisateur</label>
                                     {{ form.username }}
                                 </div>
                                 <div class="login__form">
-                                    <label class="form__label">Password</label>
+                                    <label class="form__label">Mots de passe</label>
                                     {{ form.password }}
                                 </div>
                                 <div class="login__form d-flex justify-content-between flex-wrap gap-2">
                                     <div class="form__check">
                                         <input id="forgot" type="checkbox">
-                                        <label for="forgot"> Remember me</label>
+                                        <label for="forgot">Se souvenir de moi</label>
                                     </div>
                                     <div class="text-end login__form__link">
-                                        <a href="{% url 'password_reset' %}">Forgot your password?</a>
+                                        <a href="{% url 'password_reset' %}">Mots de passe oublié?</a>
                                     </div>
                                 </div>
                                 <div class="login__button">
-                                    <button type="submit" class="default__button">Log In</button>
+                                    <button type="submit" class="default__button">S'identifier</button>
                                 </div>
                             </form>
 
 
                             <div class="login__social__option">
-                                <p>or Log-in with</p>
+                                <p>ou Connectez-vous avec</p>
 
                                 <ul class="login__social__btn">
                                     <li><a class="default__button login__button__1" href="#"><i
-                                                class="icofont-facebook"></i> Gacebook</a></li>
+                                                class="icofont-facebook"></i> Facebook</a></li>
                                     <li><a class="default__button" href="#"><i class="icofont-google-plus"></i>
                                             Google</a></li>
                                 </ul>

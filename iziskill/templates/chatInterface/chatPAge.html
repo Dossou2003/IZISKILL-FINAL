@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+            <div class="" style="padding: 0px 0px; width: 100%; height: 100%; background-color: bisque; color: aliceblue; text-align: center; display: flex; ">
+
+                <div class="Zone_1" style="padding: 0px 0px; width: 23%; height: 100%; background-color: rgb(0, 0, 0); ">
+                    <div class="newChat" style=" display: flex; flex-direction: column; gap: 10px;  ">
+                        <div>
+                            <a href="#">
+                                <button style="width: auto; height:45px; background-color:rgba(0, 102, 255, 0.682); border-radius:25px; margin-top: 100px;">
+                                   <span style="font-weight: bold; font-size: large;  color: aliceblue;">
+                                     Nouvelle Discussion
+                                   </span>
+                                </button>
+                            </a>
+                        </div>
+                        <div style=" display: flex; flex-direction: column; gap: 4px;">
+
+                            <div>
+                                <span style="color: rgba(0, 42, 255, 0.795);">Days</span>
+                            </div>
+                            <div>
+                                <h4>
+                                    L'honmme le plus riche du monde
+                                </h4>
+                                <h4>
+                                    L'honmme le plus riche du monde
+                                </h4>
+                                <h4>
+                                    L'honmme le plus riche du monde
+                                </h4>
+
+                                
+                            </div>
+                            
+
+                        </div>
+                        
+                       
+                        
+
+                    </div>
+
+                </div>
+                <div class="Zone_2" style="display: flex; flex-direction: column; gap: 10px; ">
+                    <div class="generate" style="width:1000px; height:75%; background-color: azure; margin-left:70px; margin-top:40px; overflow-y: auto; color: black;">
+                    </div>
+                    
+                    <div class="chat-container" style="margin-top: 40px;">
+                      <input type="text" class="chat-input" placeholder="Tapez votre message..." />
+                      <button class="send-button">Envoyer</button>
+                    </div>
+                    
+                        <div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+<!-- fonction css -->
+<style>
+.chat-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  padding: 10px;
+  background-color: #fff;
+}
+
+.chat-input {
+  flex: 1;
+  border: none;
+  border-radius: 25px;
+  padding: 10px;
+  font-size: 16px;
+  outline: none;
+}
+
+.send-button {
+  background-color: #007bff;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  padding: 10px 20px;
+  margin-left: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.send-button:hover {
+  background-color: #0056b3;
+}
+
+.generate {
+  width: 1000px;
+  height: 75%;
+  background-color: azure;
+  margin-left: 70px;
+  margin-top: 40px;
+  padding: 10px;
+  overflow-y: auto; /* Permet de faire défiler les messages s'il y en a trop */
+  display: flex;
+  flex-direction: column; /* Les messages s'empilent en colonne */
+}
+
+.message {
+  align-self: flex-end; /* Aligne le message à droite */
+  background-color: #007bff; /* Couleur de fond du message */
+  color: white; /* Couleur du texte */
+  padding: 10px;
+  border-radius: 15px;
+  margin: 5px 0;
+  max-width: 60%; /* Limite la largeur des messages */
+  word-wrap: break-word; /* Permet de gérer les mots longs */
+}
+
+</style>
+
+<!-- Pour l'envoie d'une information -->
+<script>
+   document.querySelector('.send-button').addEventListener('click', function() {
+    const messageText = document.querySelector('.chat-input').value;
+    if (messageText.trim()) {
+        // Crée un nouvel élément div pour le message
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message';
+        messageDiv.textContent = messageText;
+
+        // Ajoute le message au conteneur .generate
+        document.querySelector('.generate').appendChild(messageDiv);
+        
+        // Vide le champ de saisie après l'envoi
+        document.querySelector('.chat-input').value = ''; 
+
+        // Défile automatiquement vers le bas pour voir le nouveau message
+        document.querySelector('.generate').scrollTop = document.querySelector('.generate').scrollHeight;
+    }
+});
+
+document.querySelector('.chat-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        // Simule un clic sur le bouton envoyer lorsqu'on appuie sur Entrée
+        document.querySelector('.send-button').click();
+    }
+});
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
