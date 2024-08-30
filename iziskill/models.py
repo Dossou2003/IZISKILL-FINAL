@@ -154,28 +154,39 @@ class Course(models.Model):
         ],
         verbose_name="Niveau de compétence",
         default='basic',
-    )
+    )  # Nouveau champ avec des choix
+    slug = models.SlugField(unique=True)
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
-    def __str__(self):
+    
+    def _str_(self):
         return self.title
   
   
   
 
 class Video(models.Model):
-    course = models.ForeignKey(Course, related_name='videos', on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, related_name='videos', on_delete=models.CASCADE) 
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    video_url = models.URLField()
+    video_file = models.FileField(upload_to='videos/')
     order = models.PositiveIntegerField(help_text="Ordre d'affichage de la vidéo dans la playlist")
     slug = models.SlugField(max_length=255, unique=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    duration = models.DurationField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+        if self.video_file and not self.duration:
+            video = VideoFileClip(self.video_file.path)
+            self.duration = video.duration
         super().save(*args, **kwargs)
 
-    def _str_(self):
+    def __str__(self):
         return f"{self.title} ({self.course.title})"
     
 class MentoringSession(models.Model):

@@ -6,6 +6,12 @@ from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 from .models import Profile
 
 class CustomUserCreationForm(UserCreationForm):
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'common__login__input', 'placeholder': 'Mot de passe'}),
+        label="Mot de passe")
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'common__login__input', 'placeholder': ' Confirmer Mot de passe'}),
+        label="Mot de passe")
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email','status', 'password1', 'password2']
@@ -14,9 +20,7 @@ class CustomUserCreationForm(UserCreationForm):
             'last_name': forms.TextInput(attrs={'class': 'common__login__input', 'placeholder': 'Votre Nom'}),
             'username': forms.TextInput(attrs={'class': 'common__login__input', 'placeholder': 'Username'}),
             'email': forms.EmailInput(attrs={'class': 'common__login__input', 'placeholder': 'Votre Email'}),
-            'status': forms.Select(attrs={'class': 'common__login__input','placeholder': 'Your Status'}),
-            'password1': forms.PasswordInput(attrs={'class': 'common__login__input', 'placeholder': 'Mot de passe'}),
-            'password2': forms.PasswordInput(attrs={'class': 'common__login__input', 'placeholder': 'Retapez votre mot de passe'}),
+            'status': forms.Select(attrs={'class': 'common','placeholder': 'Your Status'}),
         }
 
 class CustomAuthenticationForm(AuthenticationForm):
@@ -53,6 +57,10 @@ class CustomAuthenticationForm(AuthenticationForm):
         return password
 
 class CustomPasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={'class': 'common__login__input', 'placeholder': 'Email'}),
+        label="Adresse email"
+    )
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if not User.objects.filter(email=email).exists():
@@ -60,6 +68,15 @@ class CustomPasswordResetForm(PasswordResetForm):
         return email
 
 class CustomSetPasswordForm(SetPasswordForm):
+
+    new_password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'common__login__input', 'placeholder': ' Nouveau mot de passe'}),
+        label="Nouveau mot de passe"
+    )
+    new_password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'common__login__input', 'placeholder': 'Confirmer le nouveau mot de passe'}),
+        label="Confirmer le nouveau mot de passe"
+    )
     def clean_new_password1(self):
         password1 = self.cleaned_data.get('new_password1')
         if len(password1) < 8:

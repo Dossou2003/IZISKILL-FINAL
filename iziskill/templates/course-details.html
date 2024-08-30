@@ -198,19 +198,20 @@
                                             aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                             <div class="accordion-body">
 
-
+                                                {% for video in videos %}
                                                 <div class="scc__wrap">
                                                     <div class="scc__info">
                                                         <i class="icofont-video-alt"></i>
-                                                        <h5> <span>Video :</span> Lorem ipsum dolor sit amet.
+                                                        <h5> <span>Video :</span> {{ video.title }}.
                                                         </h5>
                                                     </div>
                                                     <div class="scc__meta">
                                                         <span class="time"> <i class="icofont-clock-time"></i>
-                                                            22 minutes</span>
-                                                        <a href="{% url 'lesson'}"><span class="question"><i
+                                                            {{ video.duration }}</span>
+                                                        <a href="{% url 'preview_or_redirect' course.slug video.id %}"><span class="question"><i
                                                                     class="icofont-eye"></i> Preview</span></a>
                                                     </div>
+                                                    {% endfor %}
                                                 </div>
                                                 <div class="scc__wrap">
                                                     <div class="scc__info">

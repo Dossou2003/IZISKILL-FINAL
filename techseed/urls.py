@@ -36,7 +36,7 @@ urlpatterns = [
 
     path('course_dark/',views.course_dark, name="course_dark"),
 
-   path('courses_details/<int:id>/', views.courses_details, name='courses_details'),
+    path('courses_details/<int:id>/', views.courses_details, name='courses_details'),
 
     path('courses_details_dark/',views.courses_details_dark, name="courses_details_dark"),
 
@@ -123,8 +123,7 @@ urlpatterns = [
     path('instructor_details_dark/',views.instructor_details_dark, name="instructor_details_dark"),
 
    
-   # lessons par DOHA Primael 
-    path('lesson/',views.lesson, name="lesson"),
+    path('lesson/<slug:course_slug>/', views.lesson, name='lesson'),
 
     path('lesson_assignment/',views.lesson_assignment, name="lesson_assignment"),
 
@@ -265,6 +264,8 @@ urlpatterns = [
     path('panier/ajouter/<int:course_id>/', views.ajouter_au_panier_view, name='ajouter_au_panier'),
     path('panier/supprimer/<int:course_id>/', views.supprimer_du_panier_view, name='supprimer_du_panier'),
     path('payment/', views.payment, name='payment'),
+    path('course/<slug:course_slug>/preview/<int:video_id>/', views.preview_or_redirect, name='preview_or_redirect'),
+
    
    
 

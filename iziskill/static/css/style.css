@@ -9444,6 +9444,7 @@ Error
   margin-bottom: 10px;
   color: var(--contentColor);
 }
+
 .loginarea__wraper form .login__form .common__login__input {
   background-color: transparent;
   border: 1px solid var(--borderColor);

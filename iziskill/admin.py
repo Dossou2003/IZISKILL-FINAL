@@ -4,7 +4,7 @@ from .models import User, Profile, Course, Statistic, Enrollment, Certificate, F
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id','email','username', 'is_active',  'status', 'points', 'image') 
+    list_display = ('id','email','username', 'is_active','is_staff' , 'status', 'points', 'image') 
     search_fields = ('username', 'email')
     list_filter = ('status',)
     ordering = ('username',)
@@ -108,7 +108,7 @@ from .models import Video, MentoringSession, Payment, MentoringRequest
 
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):
-    list_display = ('title', 'course', 'order', 'video_url')
+    list_display = ('title', 'course', 'order', 'video_file')
     list_filter = ('course',)
     search_fields = ('title', 'course__title')
     ordering = ('course', 'order')

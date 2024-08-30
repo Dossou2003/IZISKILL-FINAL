@@ -240,7 +240,8 @@ def course_list(request):
 
 def courses_details(request, id):
     course = get_object_or_404(Course, id=id)
-    return render(request, 'course-details.html', {'course': course})
+    videos = course.videos.all().order_by('order')
+    return render(request, 'course-details.html', {'course': course, 'videos': videos})
 
 def panier_view(request):
     paniers = Panier.objects.filter(user=request.user)
@@ -409,8 +410,15 @@ def instructor_details_dark(request):
 
 # lessons par DOHA Primael 
 
-def lesson(request):
-    return render(request, 'lesson.html')
+def lesson(request, course_slug):
+    course = get_object_or_404(Course, slug=course_slug)
+    videos = course.videos.all().order_by('order')
+    
+    # Récupérer l'URL de la vidéo et le titre de la vidéo à partir des paramètres de requête
+    video_url = request.GET.get('video_url')
+    video_title = request.GET.get('video_title')
+    
+    return render(request, 'lesson.html', {'course': course, 'videos': videos, 'video_url': video_url, 'video_title': video_title})
 
 def lesson_assignment(request):
     return render(request, 'lesson_assignment.html')
@@ -757,3 +765,25 @@ def get_or_create_room(request, username1, username2):
 def room_list(request):
     rooms = Room.objects.all()
     return render(request, 'student-message.html', {'rooms': rooms})
+
+
+
+def preview_or_redirect(request, course_slug, video_id=None):
+    course = get_object_or_404(Course, slug=course_slug)
+    user = request.user
+    
+    if video_id:
+        video = get_object_or_404(Video, id=video_id)
+        video_url = video.video_file.url
+        video_title = video.title
+    else:
+        video_url = None
+        video_title = None
+    
+    if Enrollment.objects.filter(user=user, course=course).exists():
+        if video_url and video_title:
+            return redirect(f'/lesson/{course.slug}/?video_url={video_url}&video_title={video_title}')
+        else:
+            return redirect(f'/lesson/{course.slug}/')
+    else:
+        return redirect('payment', course_slug=course.slug)

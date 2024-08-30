@@ -7,7 +7,15 @@
     <div class="theme__shadow__circle shadow__right"></div>
 </div>
 <!-- theme fixed shadow -->
-
+<style>
+    .common {
+                                border: 1px solid #ccc;
+                                padding: 10px;
+                                width: 100%;
+                                box-sizing: border-box;
+                                border-radius: 4px;
+                                margin-bottom: 15px;}
+</style>
 <!-- breadcrumbarea__section__start -->
 
 <div class="breadcrumbarea">
@@ -47,6 +55,7 @@
 
 </div>
 <!-- breadcrumbarea__section__end-->
+ 
 
 <!-- register__section__start -->
 <div class="loginarea sp_top_100 sp_bottom_100">
@@ -104,6 +113,8 @@
                                             {{ form.email }}
                                             <div class="text-danger">{{ form.email.errors }}</div>
                                         </div>
+                                    </div>
+
                                         <div class="col-xl-6">
                                             <div class="login__form">
                                                 <label class="form__label">Status</label>
@@ -111,18 +122,17 @@
                                                 <div class="text-danger">{{ form.status.errors }}</div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-xl-6">
-                                        <div class="login__form">
-                                            <label class="form__label">Mot de passe </label>
-                                            {{ form.password1 }}
-                                            <div class="text-danger">{{ form.password1.errors }}</div>
+                                        <div class="col-xl-6">
+                                            <div class="login__form">
+                                                <label class="form__label">Mot de passe</label>
+                                                {{ form.password1}}
+                                                <div class="text-danger">{{ form.password1.errors }}</div>
+                                            </div>
                                         </div>
-                                    </div>
                                     <div class="col-xl-6">
                                         <div class="login__form">
                                             <label class="form__label">Confirmation de mot de passe</label>
-                                            {{ form.password2 }}
+                                            {{ form.password2}}
                                             <div class="text-danger">{{ form.password2.errors }}</div>
                                         </div>
                                     </div>
