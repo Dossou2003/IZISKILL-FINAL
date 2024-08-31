@@ -158,41 +158,7 @@ class Course(models.Model):
         verbose_name="Niveau de compétence",
         default='basic',
     )  # Nouveau champ avec des choix
-<<<<<<< Updated upstream
     slug = models.SlugField(unique=True)
-=======
-
-    
-    def _str_(self):
-        return self.title
- 
-class PaymentRecord(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE , verbose_name="Utilisateur")
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name="Cours")
-    amount = models.DecimalField(max_digits=10, decimal_places=2,verbose_name="Montant")
-    email = models.EmailField()
-    first_name = models.CharField(max_length=100, verbose_name="Nom")
-    details = models.TextField()
-    payment_date = models.DateTimeField(auto_now_add=True, verbose_name="Date")
-
-    def __str__(self):
-        return f"Payment by {self.first_name} for {self.course.name}"
- 
-
-# FIN 
-  
-  
-  
-
-class Video(models.Model):
-    course = models.ForeignKey(Course, related_name='videos', on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
-    video_url = models.URLField()
-    order = models.PositiveIntegerField(help_text="Ordre d'affichage de la vidéo dans la playlist")
-    slug = models.SlugField(max_length=255, unique=True, blank=True)
-
->>>>>>> Stashed changes
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
@@ -202,7 +168,17 @@ class Video(models.Model):
     def _str_(self):
         return self.title
   
-  
+class PaymentRecord(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    email = models.EmailField()
+    first_name = models.CharField(max_length=100)
+    details = models.TextField()
+    payment_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Payment by {self.first_name} for {self.course.name}"
   
 
 class Video(models.Model):
