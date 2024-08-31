@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Profile, Course, Statistic, Enrollment, Certificate, Feedback, Message, Wishlist, QuizAttempt, Assignment, UserSetting, InstructorDashboard,ClientTestimonial, Award,Category,Panier
+from .models import User, Profile, Course, Statistic, Enrollment, Certificate, Feedback, Message, Wishlist, QuizAttempt, Assignment, UserSetting, InstructorDashboard,ClientTestimonial, Award,Category,Panier,PaymentRecord
 
 
 @admin.register(User)
@@ -40,6 +40,21 @@ class PanierAdmin(admin.ModelAdmin):
         return f"{obj.total_price} €"
     total_price.short_description = 'Prix Total'
 
+class PaymentRecordAdmin(admin.ModelAdmin):
+    # Colonnes à afficher dans la liste des enregistrements
+    list_display = ('user', 'course', 'amount', 'email', 'payment_date')
+    
+    # Colonnes sur lesquelles on peut filtrer
+    list_filter = ('payment_date', 'course')
+    
+    # Champs de recherche
+    search_fields = ('user__username', 'user__first_name', 'user__email', 'course__name')
+    
+    # Champs à utiliser pour l'ordre par défaut
+    ordering = ('-payment_date',)
+
+# Enregistrer le modèle avec cette configuration dans l'administration
+admin.site.register(PaymentRecord, PaymentRecordAdmin)
 
 # FIN
 

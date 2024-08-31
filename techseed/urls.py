@@ -264,7 +264,12 @@ urlpatterns = [
     path('panier/ajouter/<int:course_id>/', views.ajouter_au_panier_view, name='ajouter_au_panier'),
     path('panier/supprimer/<int:course_id>/', views.supprimer_du_panier_view, name='supprimer_du_panier'),
     path('payment/', views.payment, name='payment'),
+<<<<<<< Updated upstream
     path('course/<slug:course_slug>/preview/<int:video_id>/', views.preview_or_redirect, name='preview_or_redirect'),
+=======
+    path('payment2//<int:course_id>/', views.payment2, name='payment2'),
+    
+>>>>>>> Stashed changes
 
    
    
