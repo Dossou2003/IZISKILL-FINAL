@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path , include
 from iziskill import views
 
 from django.contrib.auth import views as auth_views
@@ -10,7 +10,7 @@ from techseed import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
+    path('accounts/', include('allauth.urls')),
     #  about par DOHA Primael
 
     path('about/',views.about, name="about"),

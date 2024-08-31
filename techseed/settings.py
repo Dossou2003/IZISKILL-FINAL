@@ -20,7 +20,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.25.223', '127.0.0.1']
 
-
+SITE_ID = 2
 # Application definition
 
 INSTALLED_APPS = [
@@ -28,6 +28,11 @@ INSTALLED_APPS = [
     'daphne',
     'channels',
     'django.contrib.admin',
+     'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -43,6 +48,23 @@ CHANNEL_LAYERS = {
         "BACKEND": "channels.layers.InMemoryChannelLayer"
     }
 }
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '623683809972-endd1vjd0t6d3s55801c0rbi7bmg1tse.apps.googleusercontent.com ',
+            'secret': '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 ',
+            'key': ''
+        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,6 +74,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 LOGOUT_REDIRECT_URL = '/'
 ROOT_URLCONF = 'techseed.urls'
@@ -72,6 +95,10 @@ TEMPLATES = [
         },
     },
 ]
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 WSGI_APPLICATION = 'techseed.wsgi.application'
 
@@ -147,6 +174,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CCOUNT_LOGIN_REDIRECT_URL ='/dashboard/'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+#client_id = 
+#client_secret = 
+
+
 
 default_app_config = 'iziskill.apps.MyAppConfig'
 
@@ -166,4 +199,49 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'yelianjoanesazon1@gmail.com'
 EMAIL_HOST_PASSWORD = 'xqywzsghuycwndmd'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
+    },
+    'github': {
+        'SCOPE': [
+            'user',
+            'repo',
+            'read:org',
+        ],
+    },
+    'facebook': {
+        'METHOD': 'oauth2',  # Set to 'js_sdk' to use the Facebook connect SDK
+        'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'name',
+            'name_format',
+            'picture',
+            'short_name'
+        ],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': 'path.to.callable',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v13.0',
+        'GRAPH_API_URL': 'https://graph.facebook.com/v13.0',
+    }
+}
+#id client : 623683809972-endd1vjd0t6d3s55801c0rbi7bmg1tse.apps.googleusercontent.com
+#code secret : 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
+
 

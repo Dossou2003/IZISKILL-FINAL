@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
+
+
+
+{% load account socialaccount %}
+
+
+
 {% block content %}
 {% load static %}
 <!-- theme fixed shadow -->
@@ -115,12 +122,14 @@
 
                                 <ul class="login__social__btn">
                                     <li><a class="default__button login__button__1" href="#"><i
-                                                class="icofont-facebook"></i> Facebook</a></li>
-                                    <li><a class="default__button" href="#"><i class="icofont-google-plus"></i>
-                                            Google</a></li>
+                                                class="icofont-facebook"></i> Gacebook</a></li>
+                                                <li><a class="default__button" href="#"><i class="icofont-google-plus"></i>
+                                                    Google</a></li>
+                                                
                                 </ul>
                             </div>
-
+                            
+                            <a href="{% provider_login_url 'google' %}">Login with Google</a>
 
                         </div>
                     </div>
