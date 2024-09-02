@@ -4368,6 +4368,8 @@ Popular Area
   position: relative;
   border-radius: var(--borderRadius3);
   background: var(--whiteColor);
+  white-space: normal; /* Permet l'enroulement normal du texte */
+  word-break: keep-all; /* Empêche les mots d'être cassés */
 }
 .single__service:hover {
   background: var(--primaryColor);
@@ -9452,10 +9454,26 @@ Error
   font-weight: 400;
   height: 52px;
   padding: 3px 20px;
+  padding-right: 40px; /* Espace pour l'icône */
   width: 100%;
   border-radius: 5px;
   color: var(--contentColor);
+  position: relative;
 }
+
+.loginarea__wraper form .login__form .password-toggle {
+  position: absolute;
+  right: 10px; /* Ajuste la position de l'icône à droite */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--contentColor); /* Assure que l'icône utilise les mêmes couleurs */
+}
+
+.password-toggle i {
+  font-size: 14px; /* Taille de l'icône */
+}
+
 .loginarea__wraper form .login__form .form__check {
   display: flex;
 }
@@ -9791,6 +9809,19 @@ Breadcrumb Area
 
 .breadcrumbarea--3 .blogarae__img__2.course__details__img__2 {
   margin-bottom: 0;
+}
+ /* Style pour l'icône et le champ de mot de passe */
+ .password__input__container {
+  position: relative;
+  width: 100%;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 
 .animate__content {

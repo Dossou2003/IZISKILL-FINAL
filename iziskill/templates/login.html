@@ -101,7 +101,19 @@
                                 <div class="login__form">
                                     <label class="form__label">Mots de passe</label>
                                     {{ form.password }}
+                                    <label class="form__label">Password</label>
+                                    
+                                    <div class="password__input__container">
+                                        <!-- Champ de mot de passe Django -->
+                                        {{ form.password }}
+                                
+                                        <!-- Icône œil pour afficher le mot de passe -->
+                                        <span class="password-toggle" onclick="togglePasswordVisibility()">
+                                            <i id="toggleEye" class="fa fa-eye"></i>
+                                        </span>
+                                    </div>
                                 </div>
+                                
                                 <div class="login__form d-flex justify-content-between flex-wrap gap-2">
                                     <div class="form__check">
                                         <input id="forgot" type="checkbox">
@@ -168,48 +180,24 @@
 
     </div>
 </div>
+<!-- Inclusion du script directement dans le template -->
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("passwordInput");
+        var toggleEye = document.getElementById("toggleEye");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";  // Afficher le mot de passe
+            toggleEye.classList.remove("fa-eye");
+            toggleEye.classList.add("fa-eye-slash");  // Changer l'icône
+        } else {
+            passwordInput.type = "password";  // Masquer le mot de passe
+            toggleEye.classList.remove("fa-eye-slash");
+            toggleEye.classList.add("fa-eye");  // Remettre l'icône œil
+        }
+    }
+</script>
 
 <!-- login__section__end -->
 
 {% endblock %}
-
-
-</main>
-
-
-
-
-
-<!-- JS here -->
-<script src="{% static 'js/vendor/modernizr-3.5.0.min.js' %}"></script>
-<script src="{% static 'js/vendor/jquery-3.6.0.min.js' %}"></script>
-<script src="{% static 'js/popper.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
-<script src="{% static 'js/slick.min.js' %}"></script>
-<script src="{% static 'js/jquery.meanmenu.min.js' %}"></script>
-<script src="{% static 'js/ajax-form.js' %}"></script>
-<script src="{% static 'js/wow.min.js' %}"></script>
-<script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
-<script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
-<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-<script src="{% static 'js/waypoints.min.js' %}"></script>
-<script src="{% static 'js/jquery.counterup.min.js' %}"></script>
-<script src="{% static 'js/plugins.js' %}"></script>
-<script src="{% static 'js/swiper-bundle.min.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
-
-<script>
-    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (localStorage.getItem("theme-color") === "dark" || (!("theme-color" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-        document.getElementById("light--to-dark-button")?.classList.add("dark--mode");
-    }
-    if (localStorage.getItem("theme-color") === "light") {
-        document.getElementById("light--to-dark-button")?.classList.remove("dark--mode");
-    } 
-</script>
-
-
-</body>
-
-</html>

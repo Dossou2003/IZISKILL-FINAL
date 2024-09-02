@@ -40,7 +40,7 @@ class CustomAuthenticationForm(AuthenticationForm):
         widget=forms.PasswordInput(attrs={
             'class': 'common__login__input',
             'placeholder': 'Password',
-            
+            'id': 'passwordInput',
         })
     )
 
