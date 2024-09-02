@@ -1,181 +1,176 @@
-
 {% extends 'base_dashboard.html' %}
 {% block content %}
 {% load static %}
 <!-- breadcrumbarea_section_start -->
 <div class="dashboardarea sp_bottom_100">
 
-{% include 'sidebars.html' %}
+    {% include 'sidebars.html' %}
 
-<div class="dashboard">
-    <div class="container-fluid full_width_padding">
-        <div class="row">
-            {% include  'dashboard_winner.html' %} 
-                        <div class="col-xl-9 col-lg-9 col-md-12">
-                            <div class="dashboard__content__wraper">
-                                <div class="dashboard__section__title">
-                                    <h4>Order History</h4>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xl-12">
-                                        <div class="dashboard__table table-responsive">
-                                            <table>
-                                                <thead>
-                                                    <tr>
-                                                        <th>Order ID</th>
-                                                        <th>Course Name</th>
-                                                        <th>Date</th>
-                                                        <th>Price</th>
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th>#5478</th>
-                                                        <td>App Development</td>
-                                                        <td>January 27, 2024</td>
-                                                        <td>$100.99</td>
-                                                        <td><span class="dashboard__td">Success</span></td>
-                                                    </tr>
-                                                    <tr class="dashboard__table__row">
-                                                        <th>#4585</th>
-                                                        <td>Graphic</td>
-                                                        <td>May 27, 2024</td>
-                                                        <td>$200.99</td>
-                                                        <td><span
-                                                                class="dashboard__td dashboard__td__2">Processing</span>
-                                                        </td>
-                                                    </tr>
+    <div class="dashboard">
+        <div class="container-fluid full_width_padding">
+            <div class="row">
+                {% include 'dashboard_winner.html' %}
+                <div class="col-xl-9 col-lg-9 col-md-12">
+                    <div class="dashboard__content__wraper">
+                        <div class="dashboard__section__title">
+                            <h4>Historique des commandes</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="dashboard__table table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Numéro de commande</th>
+                                                <th>Nom du cours</th>
+                                                <th>Date</th>
+                                                <th>Prix</th>
+                                                <th>Statut</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>#5478</th>
+                                                <td>Developpeur d'application</td>
+                                                <td>27 Decembre 2024</td>
+                                                <td>$100.99</td>
+                                                <td><span class="dashboard__td">Succès</span></td>
+                                            </tr>
+                                            <tr class="dashboard__table__row">
+                                                <th>#4585</th>
+                                                <td>Graphisme</td>
+                                                <td>27 Mai 2024</td>
+                                                <td>$200.99</td>
+                                                <td><span class="dashboard__td dashboard__td__2">Traitement</span>
+                                                </td>
+                                            </tr>
 
-                                                    <tr>
-                                                        <th>#9656</th>
-                                                        <td>App Development</td>
-                                                        <td>January 27, 2024</td>
-                                                        <td>$100.99</td>
-                                                        <td><span class="dashboard__td">On Hold</span></td>
-                                                    </tr>
+                                            <tr>
+                                                <th>#9656</th>
+                                                <td>Developpement d'Apllication</td>
+                                                <td>27 Janvier 2024</td>
+                                                <td>$100.99</td>
+                                                <td><span class="dashboard__td">En attente</span></td>
+                                            </tr>
 
-                                                    <tr class="dashboard__table__row">
-                                                        <th>#4585</th>
-                                                        <td>Graphic</td>
-                                                        <td>May 27, 2024</td>
-                                                        <td>$200.99</td>
-                                                        <td><span class="dashboard__td dashboard__td__2">Canceled</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>#9656</th>
-                                                        <td>App Development</td>
-                                                        <td>January 27, 2024</td>
-                                                        <td>$100.99</td>
-                                                        <td><span class="dashboard__td">On Hold</span></td>
-                                                    </tr>
-                                                    <tr class="dashboard__table__row">
-                                                        <th>#4585</th>
-                                                        <td>Graphic</td>
-                                                        <td>May 27, 2024</td>
-                                                        <td>$200.99</td>
-                                                        <td><span class="dashboard__td dashboard__td__2">Canceled</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>#9656</th>
-                                                        <td>App Development</td>
-                                                        <td>January 27, 2024</td>
-                                                        <td>$100.99</td>
-                                                        <td><span class="dashboard__td">On Hold</span></td>
-                                                    </tr>
-                                                    <tr class="dashboard__table__row">
-                                                        <th>#4585</th>
-                                                        <td>Graphic</td>
-                                                        <td>May 27, 2024</td>
-                                                        <td>$200.99</td>
-                                                        <td><span class="dashboard__td dashboard__td__2">Canceled</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>#5478</th>
-                                                        <td>App Development</td>
-                                                        <td>January 27, 2024</td>
-                                                        <td>$100.99</td>
-                                                        <td><span class="dashboard__td">Success</span></td>
-                                                    </tr>
-                                                    <tr class="dashboard__table__row">
-                                                        <th>#4585</th>
-                                                        <td>Graphic</td>
-                                                        <td>May 27, 2024</td>
-                                                        <td>$200.99</td>
-                                                        <td><span
-                                                                class="dashboard__td dashboard__td__2">Processing</span>
-                                                        </td>
-                                                    </tr>
+                                            <tr class="dashboard__table__row">
+                                                <th>#4585</th>
+                                                <td>Graphisme</td>
+                                                <td>27 Mai 2024</td>
+                                                <td>$200.99</td>
+                                                <td><span class="dashboard__td dashboard__td__2">Canceled</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>#9656</th>
+                                                <td>Developpement d'application</td>
+                                                <td>27 Janvier 2024</td>
+                                                <td>$100.99</td>
+                                                <td><span class="dashboard__td">En attente</span></td>
+                                            </tr>
+                                            <tr class="dashboard__table__row">
+                                                <th>#4585</th>
+                                                <td>Graphisme</td>
+                                                <td>27 Mai 2024</td>
+                                                <td>$200.99</td>
+                                                <td><span class="dashboard__td dashboard__td__2">Annulé</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>#9656</th>
+                                                <td>Developpement d'application</td>
+                                                <td>27 Janvier 2024</td>
+                                                <td>$100.99</td>
+                                                <td><span class="dashboard__td">En attente</span></td>
+                                            </tr>
+                                            <tr class="dashboard__table__row">
+                                                <th>#4585</th>
+                                                <td>Graphisme</td>
+                                                <td>27 Mai 2024</td>
+                                                <td>$200.99</td>
+                                                <td><span class="dashboard__td dashboard__td__2">Annulé</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>#5478</th>
+                                                <td>Developpement d'application</td>
+                                                <td>27 Janvier 2024</td>
+                                                <td>$100.99</td>
+                                                <td><span class="dashboard__td">Succès</span></td>
+                                            </tr>
+                                            <tr class="dashboard__table__row">
+                                                <th>#4585</th>
+                                                <td>Graphisme</td>
+                                                <td>27 Mai 2024</td>
+                                                <td>$200.99</td>
+                                                <td><span class="dashboard__td dashboard__td__2">traitement</span>
+                                                </td>
+                                            </tr>
 
-                                                    <tr>
-                                                        <th>#9656</th>
-                                                        <td>App Development</td>
-                                                        <td>January 27, 2024</td>
-                                                        <td>$100.99</td>
-                                                        <td><span class="dashboard__td">On Hold</span></td>
-                                                    </tr>
+                                            <tr>
+                                                <th>#9656</th>
+                                                <td>Developpement d'Application</td>
+                                                <td>27 Janvier 2024</td>
+                                                <td>$100.99</td>
+                                                <td><span class="dashboard__td">En attente</span></td>
+                                            </tr>
 
-                                                    <tr class="dashboard__table__row">
-                                                        <th>#4585</th>
-                                                        <td>Graphic</td>
-                                                        <td>May 27, 2024</td>
-                                                        <td>$200.99</td>
-                                                        <td><span class="dashboard__td dashboard__td__2">Canceled</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>#9656</th>
-                                                        <td>App Development</td>
-                                                        <td>January 27, 2024</td>
-                                                        <td>$100.99</td>
-                                                        <td><span class="dashboard__td">On Hold</span></td>
-                                                    </tr>
-                                                    <tr class="dashboard__table__row">
-                                                        <th>#4585</th>
-                                                        <td>Graphic</td>
-                                                        <td>May 27, 2024</td>
-                                                        <td>$200.99</td>
-                                                        <td><span class="dashboard__td dashboard__td__2">Canceled</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>#9656</th>
-                                                        <td>App Development</td>
-                                                        <td>January 27, 2024</td>
-                                                        <td>$100.99</td>
-                                                        <td><span class="dashboard__td">On Hold</span></td>
-                                                    </tr>
-                                                    <tr class="dashboard__table__row">
-                                                        <th>#4585</th>
-                                                        <td>Graphic</td>
-                                                        <td>May 27, 2024</td>
-                                                        <td>$200.99</td>
-                                                        <td><span class="dashboard__td dashboard__td__2">Canceled</span>
-                                                        </td>
-                                                    </tr>
+                                            <tr class="dashboard__table__row">
+                                                <th>#4585</th>
+                                                <td>Graphisme</td>
+                                                <td>27 Mai 2024</td>
+                                                <td>$200.99</td>
+                                                <td><span class="dashboard__td dashboard__td__2">Annulé</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>#9656</th>
+                                                <td>Developpement d'application</td>
+                                                <td>27 Janvier 2023</td>
+                                                <td>$100.99</td>
+                                                <td><span class="dashboard__td">En attente</span></td>
+                                            </tr>
+                                            <tr class="dashboard__table__row">
+                                                <th>#4585</th>
+                                                <td>Graphisme</td>
+                                                <td>27 Mai 2024</td>
+                                                <td>$200.99</td>
+                                                <td><span class="dashboard__td dashboard__td__2">Annulé</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>#9656</th>
+                                                <td>Developpement d'application</td>
+                                                <td>27 Janvier 2023</td>
+                                                <td>$100.99</td>
+                                                <td><span class="dashboard__td">En attente</span></td>
+                                            </tr>
+                                            <tr class="dashboard__table__row">
+                                                <th>#4585</th>
+                                                <td>Graphisme</td>
+                                                <td>27 Mai 2023</td>
+                                                <td>$200.99</td>
+                                                <td><span class="dashboard__td dashboard__td__2">Annulé</span>
+                                                </td>
+                                            </tr>
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-
                         </div>
-
-
                     </div>
+
                 </div>
+
+
             </div>
         </div>
-        <!-- dashboardarea__menu__end   -->
+    </div>
+</div>
+<!-- dashboardarea__menu__end   -->
 
-        {% endblock %}
-      
-
+{% endblock %}
 
 </body>
 

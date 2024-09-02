@@ -82,7 +82,7 @@ class Profile(models.Model):
     location = models.CharField(max_length=255, blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
 
-    def _str_(self):
+    def str(self):
         return f"{self.user.username}'s Profile"
 
 
@@ -93,7 +93,7 @@ class Category(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
 
-    def _str_(self):
+    def str(self):
         return self.name
 
 
@@ -104,7 +104,7 @@ class Panier(models.Model):
     quantity = models.PositiveIntegerField(default=1)
     added_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
+    def _str_(self):
         return f"{self.course.title} - {self.user.username}"
 
     @property
@@ -162,7 +162,7 @@ class Course(models.Model):
         super().save(*args, **kwargs)
 
     
-    def _str_(self):
+    def str(self):
         return self.title
   
   
@@ -186,7 +186,7 @@ class Video(models.Model):
             self.duration = video.duration
         super().save(*args, **kwargs)
 
-    def __str__(self):
+    def _str_(self):
         return f"{self.title} ({self.course.title})"
     
 class MentoringSession(models.Model):
@@ -197,7 +197,7 @@ class MentoringSession(models.Model):
     duration = models.DurationField(help_text="Durée de la session en heures")
     price_per_hour = models.DecimalField(max_digits=6, decimal_places=2, verbose_name="Prix par heure")
 
-    def _str_(self):
+    def str(self):
         return f"Session de {self.mentor.username} avec {self.learner.username} pour le cours {self.course.title}"
     
 
@@ -209,7 +209,7 @@ class Payment(models.Model):
     payment_date = models.DateTimeField(auto_now_add=True)
     successful = models.BooleanField(default=False)
 
-    def _str_(self):
+    def str(self):
         if self.course:
             return f"Payment of {self.amount} for course {self.course.title}"
         elif self.session:
@@ -225,7 +225,7 @@ class MentoringRequest(models.Model):
     message = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=20, choices=[('pending', 'Pending'), ('accepted', 'Accepted'), ('rejected', 'Rejected')], default='pending')
 
-    def _str_(self):
+    def str(self):
         return f"Request by {self.learner.username} for mentoring in {self.course.title}"
 
 
@@ -258,7 +258,7 @@ class Statistic(models.Model):
             self.total_earnings = sum(course.total_points for course in courses)
         self.save()
 
-    def _str_(self):
+    def str(self):
         return f"Statistics for {self.user.username}"
 
 
@@ -271,7 +271,7 @@ class Enrollment(models.Model):
     enrolled_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
 
-    def _str_(self):
+    def str(self):
         return f"{self.user.username} enrolled in {self.course.title}"
 
 # Modèle pour les Certificats
@@ -281,7 +281,7 @@ class Certificate(models.Model):
     issue_date = models.DateField()
     certificate_number = models.CharField(max_length=255, unique=True)
 
-    def _str_(self):
+    def str(self):
         return f"Certificate {self.certificate_number} for {self.user.username}"
 
 # Modèle pour les Commentaires et Retours sur les cours
@@ -291,7 +291,7 @@ class Feedback(models.Model):
     rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
     comment = models.TextField(blank=True, null=True)
 
-    def _str_(self):
+    def str(self):
         return f"Feedback by {self.user.username} for {self.course.title}"
 
 # Modèle pour les Messages
@@ -302,7 +302,7 @@ class Message(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     read = models.BooleanField(default=False)
 
-    def _str_(self):
+    def str(self):
         return f"Message from {self.sender.username} to {self.recipient.username}"
 
 # Modèle pour la Liste de Souhaits (Wishlist)
@@ -310,7 +310,7 @@ class Wishlist(models.Model):
     user = models.ForeignKey(User, related_name='wishlist', on_delete=models.CASCADE)
     course = models.ForeignKey(Course, related_name='wishlisted_by', on_delete=models.CASCADE)
 
-    def _str_(self):
+    def str(self):
         return f"{self.course.title} in wishlist of {self.user.username}"
 
 # Modèle pour les Tentatives de Quiz
@@ -320,7 +320,7 @@ class QuizAttempt(models.Model):
     score = models.IntegerField()
     attempt_date = models.DateTimeField(auto_now_add=True)
 
-    def _str_(self):
+    def str(self):
         return f"Quiz attempt by {self.user.username} for {self.course.title} with score {self.score}"
 
 # Modèle pour les Devoirs (Assignments)
@@ -330,7 +330,7 @@ class Assignment(models.Model):
     description = models.TextField()
     due_date = models.DateTimeField()
 
-    def _str_(self):
+    def str(self):
         return self.title
     
     
@@ -341,7 +341,7 @@ class UserSetting(models.Model):
     receive_notifications = models.BooleanField(default=True)
     dark_mode = models.BooleanField(default=False)
 
-    def _str_(self):
+    def str(self):
         return f"Settings for {self.user.username}"
 
 
@@ -365,7 +365,7 @@ class InstructorDashboard(models.Model):
         self.total_earnings = sum(course.earnings for course in courses) if hasattr('course', 'earnings') else 0
         self.save()
 
-    def _str_(self):
+    def str(self):
         return f"Dashboard for {self.user.username}"
     
     
@@ -377,7 +377,7 @@ class ClientTestimonial(models.Model):
     rating = models.PositiveIntegerField(help_text="Note sur 5", choices=[(i, str(i)) for i in range(1, 6)])
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def _str_(self):
+    def str(self):
         return f"{self.name} - {self.profession}"
     
 
@@ -388,7 +388,7 @@ class Award(models.Model):
     image = models.ImageField(upload_to='awards/images/', blank=True, null=True)
     award_date = models.DateField()
     
-    def _str_(self):
+    def str(self):
         return self.title
 
 class Room(models.Model):
@@ -396,7 +396,7 @@ class Room(models.Model):
     slug = models.SlugField(max_length=100)
 
 
-    def __str__(self):
+    def _str_(self):
         return "Room : "+ self.name + " | Id : " + self.slug
 
     
@@ -408,5 +408,5 @@ class Messager(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
 
-    def __str__(self):
+    def _str_(self):
         return "Message is :- "+ self.content

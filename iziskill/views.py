@@ -766,6 +766,24 @@ def room_list(request):
     rooms = Room.objects.all()
     return render(request, 'student-message.html', {'rooms': rooms})
 
-# /===================Chat===========================
-def chatPage(request):
-    return render(request, 'chatPage.html')
+
+
+def preview_or_redirect(request, course_slug, video_id=None):
+    course = get_object_or_404(Course, slug=course_slug)
+    user = request.user
+    
+    if video_id:
+        video = get_object_or_404(Video, id=video_id)
+        video_url = video.video_file.url
+        video_title = video.title
+    else:
+        video_url = None
+        video_title = None
+    
+    if Enrollment.objects.filter(user=user, course=course).exists():
+        if video_url and video_title:
+            return redirect(f'/lesson/{course.slug}/?video_url={video_url}&video_title={video_title}')
+        else:
+            return redirect(f'/lesson/{course.slug}/')
+    else:
+        return redirect('payment', course_slug=course.slug)

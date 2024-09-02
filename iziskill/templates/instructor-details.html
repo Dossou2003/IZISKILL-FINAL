@@ -1,6 +1,7 @@
 {% extends 'base2.html' %}
 {% block content %}
 {% load static %}
+
 <!-- theme fixed shadow -->
 <div>
     <div class="theme__shadow__circle"></div>
@@ -8,24 +9,23 @@
 </div>
 <!-- theme fixed shadow -->
 <!-- breadcrumbarea__section__start -->
-
 <div class="breadcrumbarea">
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="breadcrumb__content__wraper" data-aos="fade-up">
-                            <div class="breadcrumb__title">
-                                <h2 class="heading">instructor page</h2>
-                            </div>
-                            <div class="breadcrumb__inner">
-                                <ul>
-                                    <li><a href="{% url 'home_5' %}">
-Home</a></li>
-                                    <li>Blog page</li>
-                                </ul>
-                            </div>
-                        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="breadcrumb__content__wraper" data-aos="fade-up">
+                    <div class="breadcrumb__title">
+                        <h2 class="heading">Page d'instructeur</h2>
+                    </div>
+                    <div class="breadcrumb__inner">
+                        <ul>
+                            <li><a href="{% url 'home_5' %}">
+                                    Accueil</a></li>
+                            <li>Blog page</li>
+                        </ul>
+                    </div>
+                </div>
 
 
 
@@ -68,13 +68,13 @@ Home</a></li>
                         <ul>
                             <li data-aos="fade-up">
                                 <div class="instructor__heading">
-                                    <h3>Hiliary Ouse</h3>
-                                    <p>Teches Interior marketer</p>
+                                    <h3>Hilaire Ouse</h3>
+                                    <p>Teches Commercial d'intérieur</p>
                                 </div>
                             </li>
                             <li data-aos="fade-up">
                                 <div class="instructor__review">
-                                    <span>Review:</span>
+                                    <span>Revoir:</span>
                                     <div class="instructor__star">
                                         <i class="icofont-star"></i>
                                         <i class="icofont-star"></i>
@@ -88,7 +88,7 @@ Home</a></li>
 
                             <li data-aos="fade-up">
                                 <div class="instructor__follow">
-                                    <span>Follow Us:</span>
+                                    <span>Suivez-nous:</span>
                                     <div class="instructor__icon">
                                         <ul>
                                             <li>
@@ -112,14 +112,14 @@ Home</a></li>
 
 
                                 <div class="instructor__button">
-                                    <a class="default__button" href="#">Follow</a>
+                                    <a class="default__button" href="#">Suivre</a>
                                 </div>
 
                             </li>
                         </ul>
                     </div>
                     <div class="instructor__content__wraper" data-aos="fade-up">
-                        <h6>Short Bio</h6>
+                        <h6>Courte biographie</h6>
                         <p>Only a quid me old mucker squiffy tomfoolery grub cheers ruddy cor blimey guvnor in
                             my flat, up the duff Eaton car boot up the kyver pardon you A bit of how's your
                             father David skive off sloshed, don't get shirty with me
@@ -131,7 +131,7 @@ Home</a></li>
                     </div>
                     <div class="online__course__wrap">
                         <div class="instructor__heading__2" data-aos="fade-up">
-                            <h3>Online Course</h3>
+                            <h3>Cours en ligne</h3>
                         </div>
 
                         <div class="row instructor__slider__active row__custom__class" data-aos="fade-up">
@@ -141,7 +141,7 @@ Home</a></li>
                                         <a href="{% url 'courses_details' %}"><img loading="lazy"
                                                 src="{% static 'img/grid/grid_1.png' %}" alt="grid"></a>
                                         <div class="gridarea__small__button">
-                                            <div class="grid__badge">Data &amp; Tech</div>
+                                            <div class="grid__badge">Données &amp; Tech</div>
                                         </div>
                                         <div class="gridarea__small__icon">
                                             <a href="{}"><i class="icofont-heart-alt"></i></a>
@@ -152,7 +152,7 @@ Home</a></li>
                                         <div class="gridarea__list">
                                             <ul>
                                                 <li>
-                                                    <i class="icofont-book-alt"></i> 23 Lesson
+                                                    <i class="icofont-book-alt"></i> 23 Leçons
                                                 </li>
                                                 <li>
                                                     <i class="icofont-clock-time"></i> 1 hr 30 min
@@ -160,12 +160,12 @@ Home</a></li>
                                             </ul>
                                         </div>
                                         <div class="gridarea__heading">
-                                            <h3><a href="{% url 'courses_details' %}">Foundation course to under stand
-                                                    about softwere</a></h3>
+                                            <h3><a href="{% url 'courses_details' %}">Apprendre c equ'est un
+                                                    progiciel</a></h3>
                                         </div>
                                         <div class="gridarea__price">
                                             $32.00 <del>/ $67.00</del>
-                                            <span> <del class="del__2">Free</del></span>
+                                            <span> <del class="del__2">Gratuit</del></span>
 
                                         </div>
                                         <div class="gridarea__bottom">
@@ -197,7 +197,7 @@ Home</a></li>
                                     <div class="gridarea__img">
                                         <img loading="lazy" src="{% static 'img/grid/grid_2.png' %}" alt="grid">
                                         <div class="gridarea__small__button">
-                                            <div class="grid__badge blue__color">Mechanical</div>
+                                            <div class="grid__badge blue__color">Meanique</div>
                                         </div>
                                         <div class="gridarea__small__icon">
                                             <a href="{}"><i class="icofont-heart-alt"></i></a>
@@ -208,7 +208,7 @@ Home</a></li>
                                         <div class="gridarea__list">
                                             <ul>
                                                 <li>
-                                                    <i class="icofont-book-alt"></i> 29 Lesson
+                                                    <i class="icofont-book-alt"></i> 29 Leçons
                                                 </li>
                                                 <li>
                                                     <i class="icofont-clock-time"></i> 2 hr 10 min
@@ -216,12 +216,11 @@ Home</a></li>
                                             </ul>
                                         </div>
                                         <div class="gridarea__heading">
-                                            <h3> <a href="{}">Nidnies course to under stand
-                                                    about softwere</a></h3>
+                                            <h3> <a href="{}">NQu'est ce que la CHIMIE</a></h3>
                                         </div>
                                         <div class="gridarea__price green__color">
                                             $32.00<del>/$67.00</del>
-                                            <span>.Free</span>
+                                            <span>.Gratuit</span>
 
                                         </div>
                                         <div class="gridarea__bottom">
@@ -252,7 +251,7 @@ Home</a></li>
                                         <a href="{% url 'courses_details' %}"><img loading="lazy"
                                                 src="{% static 'img/grid/grid_1.png' %}" alt="grid"></a>
                                         <div class="gridarea__small__button">
-                                            <div class="grid__badge">Data &amp; Tech</div>
+                                            <div class="grid__badge">Données &amp; Tech</div>
                                         </div>
                                         <div class="gridarea__small__icon">
                                             <a href="{}"><i class="icofont-heart-alt"></i></a>
@@ -263,7 +262,7 @@ Home</a></li>
                                         <div class="gridarea__list">
                                             <ul>
                                                 <li>
-                                                    <i class="icofont-book-alt"></i> 23 Lesson
+                                                    <i class="icofont-book-alt"></i> 23 Leçons
                                                 </li>
                                                 <li>
                                                     <i class="icofont-clock-time"></i> 1 hr 30 min
@@ -271,12 +270,12 @@ Home</a></li>
                                             </ul>
                                         </div>
                                         <div class="gridarea__heading">
-                                            <h3><a href="{% url 'courses_details' %}">Foundation course to under stand
-                                                    about softwere</a></h3>
+                                            <h3><a href="{% url 'courses_details' %}">Comment realiser des experience a
+                                                    la maison</a></h3>
                                         </div>
                                         <div class="gridarea__price">
                                             $32.00 <del>/ $67.00</del>
-                                            <span> <del class="del__2">Free</del></span>
+                                            <span> <del class="del__2">Gratuit</del></span>
 
                                         </div>
                                         <div class="gridarea__bottom">
@@ -308,7 +307,7 @@ Home</a></li>
                                     <div class="gridarea__img">
                                         <img loading="lazy" src="{% static 'img/grid/grid_2.png' %}" alt="grid">
                                         <div class="gridarea__small__button">
-                                            <div class="grid__badge blue__color">Mechanical</div>
+                                            <div class="grid__badge blue__color">Mecanique</div>
                                         </div>
                                         <div class="gridarea__small__icon">
                                             <a href="{}"><i class="icofont-heart-alt"></i></a>
@@ -319,7 +318,7 @@ Home</a></li>
                                         <div class="gridarea__list">
                                             <ul>
                                                 <li>
-                                                    <i class="icofont-book-alt"></i> 29 Lesson
+                                                    <i class="icofont-book-alt"></i> 29 Leçons
                                                 </li>
                                                 <li>
                                                     <i class="icofont-clock-time"></i> 2 hr 10 min
@@ -327,12 +326,11 @@ Home</a></li>
                                             </ul>
                                         </div>
                                         <div class="gridarea__heading">
-                                            <h3> <a href="{}">Nidnies course to under stand
-                                                    about softwere</a></h3>
+                                            <h3> <a href="{}">Comprendre la resonnance des matieres...</a></h3>
                                         </div>
                                         <div class="gridarea__price green__color">
                                             $32.00<del>/$67.00</del>
-                                            <span>.Free</span>
+                                            <span>.Gratuit</span>
 
                                         </div>
                                         <div class="gridarea__bottom">

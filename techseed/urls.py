@@ -278,7 +278,7 @@ urlpatterns = [
  
 
 # ===================================================chatPage===========================================
- path('chatPage', views.chatPage, name='chatPage'),
+ #path('chatPage', views.chatPage, name='chatPage'),
 
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
