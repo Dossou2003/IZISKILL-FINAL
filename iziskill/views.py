@@ -226,7 +226,10 @@ def courses_grid(request):
     return render(request, 'course-grid.html')
 def courses_grid_dark(request):
     return render(request, 'course-grid-dark.html')
-# PAR PRIMAEL DOHA 
+
+
+
+# PAR PRIMAEL DOHA  processus de paiment 
 
 def course_list(request):
     courses = Course.objects.all()  # Récupère tous les objets Course
@@ -245,26 +248,22 @@ def courses_details(request, id):
 
 def panier_view(request):
     paniers = Panier.objects.filter(user=request.user)
-    total = sum(item.total_price for item in paniers)
-    
+    total = sum(item.total_price for item in paniers)    
     return render(request, 'panier.html', {'paniers': paniers, 'total': total})
 
-def ajouter_au_panier(request, course_id):
-    course = Course.objects.get(id=course_id)
-    panier, created = Panier.objects.get_or_create(user=request.user, course=course)
-    
-    if not created:
-        panier.quantity += 1
-        panier.save()
-    
-    return panier
 
-
-
-            
 def ajouter_au_panier_view(request, course_id):
-    ajouter_au_panier(request, course_id)
-    return redirect('cart')
+    course = get_object_or_404(Course, id=course_id)
+    
+    panier_existe = Panier.objects.filter(user=request.user, course=course).exists()
+    
+    if panier_existe:
+        messages.info(request, "Ce cours est déjà dans votre panier.")
+    else:
+        Panier.objects.create(user=request.user, course=course, quantity=1)
+        messages.success(request, "Le cours a été ajouté à votre panier.")
+    
+    return redirect('courses_details', id=course.id)
 
 def supprimer_du_panier(request, course_id):
     course = Course.objects.get(id=course_id)
@@ -286,20 +285,50 @@ def payment(request):
     total = sum(item.total_price for item in paniers)
     return render(request, 'payment.html', {'paniers': paniers, 'total': total, 'course': course})
 
-def cart(request):
-    courses = Course.objects.all()  # Récupère tous les objets Course
-    for course in courses:
-        if not course.image:
-            # Gérer les cas où il n'y a pas d'image associée
-            course.image_url = None
-        else:
-            course.image_url = course.image.url
+def payment2(request, course_id=None):
+    # Récupération du cours spécifié par l'ID
+    course = get_object_or_404(Course, id=course_id)
+     # Récupération de l'utilisateur connecté
+    user = request.user
+    # Calcul du total basé sur le prix du cours
+    total = course.price
+    nom = user.first_name
+    mail = user.email
+    detail = " Payer cours "
+     # Enregistrement dans la table PaymentRecord
+    payment_record = PaymentRecord(
+        user=user,
+        course=course,
+        amount=total,
+        email=mail,
+        first_name=nom,
+        details=detail
+    )
+    payment_record.save()
+    
+    # Passage des variables au template. Supprimer 'paniers' et 'amout1' si elles ne sont pas utilisées
+    return render(request, 'payment2.html', {'total': total, 'course': course, 'nom' : nom, 'mail': mail, 'detail' : detail  })
 
+def cart(request):
     paniers = Panier.objects.filter(user=request.user)
     total = sum(item.total_price for item in paniers)
     
+    # Préparer les données pour chaque panier avec les URLs d'image
+    paniers_with_images = []
+    for panier in paniers:
+        image_url = panier.course.image.url if panier.course.image else None
+        paniers_with_images.append({
+            'course': panier.course,
+            'quantity': panier.quantity,
+            'total_price': panier.total_price,
+            'image_url': image_url
+        })
     
-    return render(request, 'cart.html', {'paniers': paniers, 'total': total, 'courses' : courses})
+    return render(request, 'cart.html', {
+        'paniers_with_images': paniers_with_images,
+        'total': total
+    })
+
     
 
 def cart_dark(request):
@@ -308,7 +337,8 @@ def cart_dark(request):
 
 
 
-#####
+##### fin de paiment 
+
 
 def course_list_dark(request):
     return render(request, 'course-list-dark.html')
@@ -766,12 +796,22 @@ def room_list(request):
     rooms = Room.objects.all()
     return render(request, 'student-message.html', {'rooms': rooms})
 
+<<<<<<< HEAD
 
+=======
+# /===================Chat===========================
+def chatPage(request):
+    return render(request, 'chatPage.html')
+>>>>>>> 6f16dc48e6a5b33c4d32da4e78a6da73eef2f17c
 
 def preview_or_redirect(request, course_slug, video_id=None):
     course = get_object_or_404(Course, slug=course_slug)
     user = request.user
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 6f16dc48e6a5b33c4d32da4e78a6da73eef2f17c
     if video_id:
         video = get_object_or_404(Video, id=video_id)
         video_url = video.video_file.url
@@ -779,7 +819,11 @@ def preview_or_redirect(request, course_slug, video_id=None):
     else:
         video_url = None
         video_title = None
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 6f16dc48e6a5b33c4d32da4e78a6da73eef2f17c
     if Enrollment.objects.filter(user=user, course=course).exists():
         if video_url and video_title:
             return redirect(f'/lesson/{course.slug}/?video_url={video_url}&video_title={video_title}')

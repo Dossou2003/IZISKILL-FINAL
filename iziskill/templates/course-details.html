@@ -73,10 +73,10 @@
                     <div class="course__button__wraper" data-aos="fade-up">
                         <div class="course__button" style="width: auto; justify-content: center; height: auto;">
                             <a href="{}">Featured</a>
-                            <a class="course__2" href="#" style="margin: auto; padding: auto;"  >{{ course.title }}</a>
+                            <a class="course__2" href="#" style="margin: auto; padding: auto;">{{ course.title }}</a>
                         </div>
                         <div class="course__date">
-                            <p>Créer le :<span>{{ course.created_at|date:"d M  Y" }}</span></p>
+                            <p>Créer le :<span>{{ course.created_at|date:"d M Y" }}</span></p>
                         </div>
                     </div>
                     <div class="course__details__heading" data-aos="fade-up">
@@ -1402,13 +1402,24 @@
                                 <a href="{}"></a>
                             </div>
                         </div>
-
+                        {% if messages %}
+                        <div class="messages">
+                            {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
                         <div class="course__summery__button">
-                            <a class="default__button" href="{% url 'ajouter_au_panier' course.id %}">Ajouter au panier</a>
-                            <a class="default__button default__button--2" href="# ">Payer</a>
+                            <a class="default__button" href="{% url 'ajouter_au_panier' course.id %}">Ajouter au
+                                panier</a>
+
+                            <a class="default__button default__button--2"
+                                href="{% url 'payment2' course_id=course.id %}">Payer</a>
                             <span>
                                 <i class="icofont-ui-rotation"></i>
-                                
+
                             </span>
                         </div>
 
@@ -1417,19 +1428,20 @@
                                 <li>
                                     <div class="course__summery__item">
                                         <span class="sb_label">Instructeur:</span><span class="sb_content"><a
-                                                href="">{{ course.instructor.username }}</a></span>
+                                                href="">{{course.instructor.username }}</a></span>
                                     </div>
                                 </li>
 
                                 <li>
                                     <div class="course__summery__item">
-                                        <span class="sb_label">Date de Début</span><span class="sb_content">{{ course.date|date:"d M Y" }}</span>
+                                        <span class="sb_label">Date de Début</span><span
+                                            class="sb_content">{{course.date|date:"d M Y" }}</span>
                                     </div>
                                 </li>
 
                                 <li>
                                     <div class="course__summery__item">
-                                        <span class="sb_label">Durrée Total</span><span class="sb_content">{{ course.duration }}</span>
+                                        <span class="sb_label">Durrée Total</span><span class="sb_content">{{course.duration }}</span>
                                     </div>
                                 </li>
 
@@ -1439,29 +1451,29 @@
                                     </div>
                                 </li>
 
-                                
+
 
                                 <li>
                                     <div class="course__summery__item">
-                                        <span class="sb_label">Niveau de compétence :</span><span class="sb_content">{{ course.get_skill_level_display }}</span>
+                                        <span class="sb_label">Niveau de compétence :</span><span class="sb_content">{{course.get_skill_level_display }}</span>
                                     </div>
                                 </li>
 
                                 <li>
                                     <div class="course__summery__item">
-                                        <span class="sb_label">Langue</span><span class="sb_content">{{ course.language }}</span>
+                                        <span class="sb_label">Langue</span><span class="sb_content">{{course.language}}</span>
                                     </div>
                                 </li>
 
                                 <li>
                                     <div class="course__summery__item">
-                                        <span class="sb_label">Evaluation</span><span class="sb_content">{{ course.quiz|yesno:"Oui,Non" }}</span>
+                                        <span class="sb_label">Evaluation</span><span class="sb_content">{{course.quiz|yesno:"Oui,Non" }}</span>
                                     </div>
                                 </li>
 
                                 <li>
                                     <div class="course__summery__item">
-                                        <span class="sb_label">Certificat</span><span class="sb_content">{{ course.certificat|yesno:"Oui,Non" }}</span>
+                                        <span class="sb_label">Certificat</span><span class="sb_content">{{course.certificat|yesno:"Oui,Non" }}</span>
                                     </div>
                                 </li>
 

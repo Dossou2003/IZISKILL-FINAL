@@ -1,166 +1,149 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-        <!-- breadcrumbarea__section__start -->
+<!-- breadcrumbarea__section__start -->
 
-        <div class="breadcrumbarea">
+<div class="breadcrumbarea">
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="breadcrumb__content__wraper" data-aos="fade-up">
-                            <div class="breadcrumb__title">
-                                <h2 class="heading">Cart</h2>
-                            </div>
-                            <div class="breadcrumb__inner">
-                                <ul>
-                                    <li><a href="index.html">Home</a></li>
-                                    <li>Cart</li>
-                                </ul>
-                            </div>
-                        </div>
-
-
-
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="breadcrumb__content__wraper" data-aos="fade-up">
+                    <div class="breadcrumb__title">
+                        <h2 class="heading">Cart</h2>
+                    </div>
+                    <div class="breadcrumb__inner">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li>Cart</li>
+                        </ul>
                     </div>
                 </div>
-            </div>
 
-            <div class="shape__icon__2">
-                <img loading="lazy"  class=" shape__icon__img shape__icon__img__1" src="{% static 'img/herobanner/herobanner__1.png' %}"
- alt="photo">
-                <img loading="lazy"  class=" shape__icon__img shape__icon__img__2" src="{% static 'img/herobanner/herobanner__2.png' %}"
- alt="photo">
-                <img loading="lazy"  class=" shape__icon__img shape__icon__img__3" src="{% static 'img/herobanner/herobanner__3.png' %}"
- alt="photo">
-                <img loading="lazy"  class=" shape__icon__img shape__icon__img__4" src="{% static 'img/herobanner/herobanner__5.png' %}"
- alt="photo">
-            </div>
 
+
+            </div>
         </div>
-        <!-- breadcrumbarea__section__end-->
+    </div>
 
-    
+    <div class="shape__icon__2">
+        <img loading="lazy" class=" shape__icon__img shape__icon__img__1"
+            src="{% static 'img/herobanner/herobanner__1.png' %}" alt="photo">
+        <img loading="lazy" class=" shape__icon__img shape__icon__img__2"
+            src="{% static 'img/herobanner/herobanner__2.png' %}" alt="photo">
+        <img loading="lazy" class=" shape__icon__img shape__icon__img__3"
+            src="{% static 'img/herobanner/herobanner__3.png' %}" alt="photo">
+        <img loading="lazy" class=" shape__icon__img shape__icon__img__4"
+            src="{% static 'img/herobanner/herobanner__5.png' %}" alt="photo">
+    </div>
 
-        <!-- cart__section__start -->
-        <div class="cartarea sp_bottom_100 sp_top_100">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <form action="#">
-                            <div class="cartarea__table__content table-responsive">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Cours</th>
-                                            <th>Titre</th>
-                                            <th>Montant</th>
-                                            
-                                            
-                                            <th>Supprimer</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for item in paniers %}
-                                        <tr>
-                                            <td class="cartarea__product__thumbnail">
-                                                {% if course.image %}
-                                                <a href="#">
-                                                    <img loading="lazy"  src="{{ course.image.url }}" alt="product-1">
-                                                </a>
-                                                {% else %}
-                                                <p>Aucune image disponible.</p>
-                                                {% endif %}
-                                            </td>
-                                            
-                                            
-                                            <td class="cartarea__product__subtotal">{{ item.course.title }}</td>
-                                            <td class="cartarea__product__subtotal">{{ item.course.price }} FCFA</td>
-                                            <td class="cartarea__product__remove">
-                                                <a href="{% url 'supprimer_du_panier' item.course.id %}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Trash</title><path d="M112 112l20 320c.95 18.49 14.4 32 32 32h184c17.67 0 30.87-13.51 32-32l20-320" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 112h352"/><path d="M192 112V72h0a23.93 23.93 0 0124-24h80a23.93 23.93 0 0124 24h0v40M256 176v224M184 176l8 224M328 176l-8 224" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg></a>
-                                            </td>
-                                        </tr>
-                                        {% endfor %}
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </form>
+</div>
+<!-- breadcrumbarea__section__end-->
+
+
+
+<!-- cart__section__start -->
+<div class="cartarea sp_bottom_100 sp_top_100">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <form action="#">
+                    <div class="cartarea__table__content table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Cours</th>
+                                    <th>Titre</th>
+                                    <th>Montant</th>
+
+
+                                    <th>Supprimer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                               
+
+                            {% for item in paniers_with_images %}
+                                <tr>
+                                    <td class="cartarea__product__thumbnail">
+                                        {% if item.image_url %}
+                                        <img src="{{ item.image_url }}" alt="{{ item.course.name }}" width="100px"
+                                            height="80px">
+                                        {% else %}
+                                        <p>Pas d'image disponible</p>
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <td class="cartarea__product__subtotal">{{ item.course.title }}</td>
+                                    <td class="cartarea__product__subtotal">{{ item.course.price }} FCFA</td>
+                                    <td class="cartarea__product__remove">
+                                        <a href="{% url 'supprimer_du_panier' item.course.id %}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon"
+                                                viewBox="0 0 512 512">
+                                                <title>Trash</title>
+                                                <path
+                                                    d="M112 112l20 320c.95 18.49 14.4 32 32 32h184c17.67 0 30.87-13.51 32-32l20-320"
+                                                    fill="none" stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="32" />
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-miterlimit="10" stroke-width="32" d="M80 112h352" />
+                                                <path
+                                                    d="M192 112V72h0a23.93 23.93 0 0124-24h80a23.93 23.93 0 0124 24h0v40M256 176v224M184 176l8 224M328 176l-8 224"
+                                                    fill="none" stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="32" />
+                                            </svg></a>
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                    <div class="cartarea__shiping__update__wrapper">
-                        <div class="cartarea__shiping__update">
-                        <a href="">Continue Shopping</a>
-                        </div>
-                        <div class="cartarea__clear">
-                        <a href="#">Update Cart</a>  
-                        <a href="#">Clear Cart</a>
-                        </div>
+                </form>
+            </div>
+        </div>
+        <div class="row" style="display: flex; justify-content: center;">
+            <div class="cartarea__shiping__update">
+                <a href="{% url 'course_list'%}">Ajouter des cours</a>
+            </div>
+            <div class="col-lg-4 col-lg-4 col-md-12 col-12">
+                <div class="cartarea__grand__totall cartarea__tax">
+                    <div class="cartarea__title">
+                        <h4>Montant Total</h4>
                     </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-12">
-                        <div class="cartarea__tax">
-                            <div class="cartarea__title">
-                                <h4>Estimate Shipping And Tax</h4> 
-                            </div>
-                            <div class="cartarea__text">
-                                <p>Enter your destination to get a shipping estimate.</p>
-                            </div>
-                            <div class="cartarea__select">
-                                <div class="cartarea__tax__select">
-                                    <label for="address__country">* Country</label>
-                                    <select name="email" id="address__country">
-                                        <option value="USA">USA</option>
-                                        <option value="UK">UK</option>
-                                        <option value="Canada">Canada</option>
-                                        <option value="Russia">Russia</option>
-                                        <option value="China">China</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="cartarea__code cartarea__select">
-                                <label for="address__zip">* Zip/Postal Code</label>
-                                <input type="text" placeholder="Zip/Postal Code" id="address__zip" name="address[zip]">
-                            </div>
-                            <button type="button" class="default__button">Calculate shipping</button>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-lg-4 col-md-12 col-12">
-                        <div class="cartarea__discount__code__wrapper cartarea__tax">
-                            <div class="cartarea__title">
-                                <h4>Cart Note</h4> 
-                            </div>
-                        <div class="cartarea__discount__code">
-                            <p>Special instructions for seller</p>
-                            <textarea name="note" id="CartSpecialInstructions"></textarea>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-lg-4 col-md-12 col-12">
-                        <div class="cartarea__grand__totall cartarea__tax">
-                            <div class="cartarea__title">
-                                <h4>Cart Total</h4> 
-                            </div>
-                        <h5>Montant total 
-                            <span>{{ total }}FCFA</span>
-                        </h5>
+                    <h3>
+                        {{ total }} FCFA
+                        </h4>
                         <a href="{% url 'payment' %}">Payer</a>
-                        </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="cartarea__shiping__update__wrapper">
+
+                    <div class="cartarea__clear">
+
+
                     </div>
                 </div>
             </div>
         </div>
-    <!-- cart__section__end-->
-       
-    {% endblock %}
+        <div class="row">
 
 
-      
+
+        </div>
+    </div>
+</div>
+<!-- cart__section__end-->
+
+{% endblock %}
+
+
+
 
 
 </body>

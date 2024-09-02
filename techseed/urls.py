@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path , include
 from iziskill import views
 
 from django.contrib.auth import views as auth_views
@@ -10,7 +10,7 @@ from techseed import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
+    path('accounts/', include('allauth.urls')),
     #  about par DOHA Primael
 
     path('about/',views.about, name="about"),
@@ -265,6 +265,8 @@ urlpatterns = [
     path('panier/supprimer/<int:course_id>/', views.supprimer_du_panier_view, name='supprimer_du_panier'),
     path('payment/', views.payment, name='payment'),
     path('course/<slug:course_slug>/preview/<int:video_id>/', views.preview_or_redirect, name='preview_or_redirect'),
+    path('payment2//<int:course_id>/', views.payment2, name='payment2'),
+    
 
    
    
